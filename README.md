@@ -20,6 +20,8 @@ import:   https://raw.githubusercontent.com/liaScript/rextester_template/master/
 
 # C-Programming
 
+
+
 > **Wikibooks Contributors Present:**
 >
 > A comprehensive look at the C programming language and its features.
@@ -1665,8 +1667,1774 @@ example.
 The string literal is assigned to a character `array`, arrays are described
 later. Example:
 
-const char MY_CONSTANT_PEDANTIC_ITCH[] = "learn the usage context.\n";
-
 ``` c
+const char MY_CONSTANT_PEDANTIC_ITCH[] = "learn the usage context.\n";
 printf("Square brackets after a variable name means it is a pointer to a string of memory blocks the size of the type of the array element.\n");
 ```
+
+
+#### The `float` type
+
+`float` is short for __floating point__. It stores inexact representations of
+real numbers, both integer and non-integer values. It can be used with numbers
+that are much greater than the greatest possible `int`. `float` literals must be
+suffixed with `F` or `f`. Examples are: `3.1415926f`, `4.0f`, `6.022e+23f`.
+
+It is important to note that floating-point numbers are inexact. Some numbers
+like `0.1f` cannot be represented exactly as `float`s but will have a small
+error. Very large and very small numbers will have less precision and arithmetic
+operations are sometimes not associative or distributive because of a lack of
+precision. Nonetheless, floating-point numbers are most commonly used for
+approximating real numbers and operations on them are efficient on modern
+microprocessors.[^2]
+[Floating-point arithmetic](https://en.wikipedia.org/wiki/Floating-point_arithmetic)
+is explained in more detail on Wikipedia.
+
+`float` variables can be declared using the `float` keyword. A `float` is only
+one machine word in size. Therefore, it is used when less precision than a
+`double` provides is required.
+
+[^2]: Representations of real numbers other than floating-point numbers exist
+      but are not fundamental data types in C. Some C compilers support
+      [fixed-point arithmetic](https://en.wikipedia.org/wiki/Fixed-point_arithmetic)
+      data types, but these are not part of standard C. Libraries such as the
+      [GNU Multiple Precision Arithmetic Library](https://en.wikipedia.org/wiki/GNU_Multiple_Precision_Arithmetic_Library)
+      offer more data types for real numbers and very large numbers.
+
+
+#### The `double` type
+
+The `double` and `float` types are very similar. The `float` type allows you to
+store single-precision floating point numbers, while the `double` keyword allows
+you to store double-precision floating point numbers – real numbers, in other
+words. Its size is typically two machine words, or 8 bytes on most machines.
+Examples of `double` literals are `3.1415926535897932`, `4.0`, `6.022e+23`
+(scientific notation). If you use 4 instead of 4.0, the 4 will be interpreted as
+an `int`.
+
+The distinction between floats and doubles was made because of the differing
+sizes of the two types. When C was first used, space was at a minimum and so the
+judicious use of a `float` instead of a `double` saved some memory. Nowadays,
+with memory more freely available, you rarely need to conserve memory like this –
+it may be better to use doubles consistently. Indeed, some C implementations use
+doubles instead of floats when you declare a `float` variable.
+
+If you want to use a `double` variable, use the `double` keyword.
+
+
+### `sizeof`
+
+If you have any doubts as to the amount of memory actually used by any variable
+(and this goes for types we'll discuss later, also), you can use the `sizeof`
+operator to find out for sure. (For completeness, it is important to mention
+that `sizeof` is a
+[unary operator](https://en.wikipedia.org/wiki/Unary_operation), not a
+function.) Its syntax is:
+
+``` c
+sizeof object
+sizeof(type)
+```
+
+The two expressions above return the size of the object and type specified, in
+bytes. The return type is `size_t` (defined in the header `<stddef.h>`) which is
+an unsigned value. Here's an example usage:
+
+``` c
+size_t size;
+int i;
+size = sizeof(i);
+```
+
+size will be set to 4, assuming `CHAR_BIT` is defined as 8, and an integer is 32
+bits wide. The value of `sizeof`'s result is the number of bytes.
+
+Note that when `sizeof` is applied to a `char`, the result is 1; that is:
+
+``` c
+sizeof(char)
+```
+
+always returns 1.
+
+
+### Data type modifiers
+
+One can alter the data storage of any data type by preceding it with certain
+modifiers.
+
+long and short are modifiers that make it possible for a data type to use either
+more or less memory. The int keyword need not follow the short and long
+keywords. This is most commonly the case. A short can be used where the values
+fall within a lesser range than that of an int, typically -32768 to 32767. A
+long can be used to contain an extended range of values. It is not guaranteed
+that a short uses less memory than an int, nor is it guaranteed that a long
+takes up more memory than an int. It is only guaranteed that sizeof(short) <=
+sizeof(int) <= sizeof(long). Typically a short is 2 bytes, an int is 4 bytes,
+and a long either 4 or 8 bytes. Modern C compilers also provide long long which
+is typically an 8 byte integer.
+
+In all of the types described above, one bit is used to indicate the sign
+(positive or negative) of a value. If you decide that a variable will never hold
+a negative value, you may use the unsigned modifier to use that one bit for
+storing other data, effectively doubling the range of values while mandating
+that those values be positive. The unsigned specifier also may be used without a
+trailing int, in which case the size defaults to that of an int. There is also a
+signed modifier which is the opposite, but it is not necessary, except for
+certain uses of char, and seldom used since all types (except char) are signed
+by default.
+
+The long modifier can also be used with double to create a long double type.
+This floating-point type may (but is not required to) have greater precision
+than the double type.
+
+To use a modifier, just declare a variable with the data type and relevant modifiers:
+
+``` c
+unsigned short int usi;  /* fully qualified -- unsigned short int */
+short si;                /* short int */
+unsigned long uli;       /* unsigned long int */
+```
+
+
+### `const` qualifier
+
+When the `const` qualifier is used, the declared variable must be initialized at
+declaration. It is then not allowed to be changed.
+
+While the idea of a variable that never changes may not seem useful, there are
+good reasons to use `const`. For one thing, many compilers can perform some
+small optimizations on data when it knows that data will never change. For
+example, if you need the value of π in your calculations, you can declare a
+`const` variable of pi, so a program or another function written by someone else
+cannot change the value of pi.
+
+Note that a Standard conforming compiler must issue a warning if an attempt is
+made to change a `const` variable - but after doing so the compiler is free to
+ignore the `const` qualifier.
+
+
+### Magic numbers
+
+When you write C programs, you may be tempted to write code that will depend on
+certain numbers. For example, you may be writing a program for a grocery store.
+This complex program has thousands upon thousands of lines of code. The
+programmer decides to represent the cost of a can of corn, currently 99 cents,
+as a literal throughout the code. Now, assume the cost of a can of corn changes
+to 89 cents. The programmer must now go in and manually change each entry of 99
+cents to 89. While this is not that big of a problem, considering the "global
+find-replace" function of many text editors, consider another problem: the cost
+of a can of green beans is also initially 99 cents. To reliably change the
+price, you have to look at every occurrence of the number 99.
+
+C possesses certain functionality to avoid this. This functionality is
+approximately equivalent, though one method can be useful in one circumstance,
+over another.
+
+
+#### Using the `const` keyword
+
+The `const` keyword helps eradicate __magic numbers__. By declaring a variable
+`const` corn at the beginning of a block, a programmer can simply change that
+`const` and not have to worry about setting the value elsewhere.
+
+There is also another method for avoiding magic numbers. It is much more
+flexible than `const`, and also much more problematic in many ways. It also
+involves the preprocessor, as opposed to the compiler. Behold...
+
+
+#### `#define`
+
+When you write programs, you can create what is known as a macro, so when the
+computer is reading your code, it will replace all instances of a word with the
+specified expression.
+
+Here's an example. If you write
+
+``` c
+#define PRICE_OF_CORN 0.99
+```
+
+when you want to, for example, print the price of corn, you use the word
+`PRICE_OF_CORN` instead of the number 0.99 – the preprocessor will replace all
+instances of `PRICE_OF_CORN` with 0.99, which the compiler will interpret as the
+literal double 0.99. The preprocessor performs substitution, that is,
+`PRICE_OF_CORN` is replaced by 0.99 so this means there is no need for a
+semicolon.
+
+It is important to note that `#define` has basically the same functionality as the
+"find-and-replace" function in a lot of text editors/word processors.
+
+For some purposes, `#define` can be harmfully used, and it is usually preferable
+to use `const` if `#define` is unnecessary. It is possible, for instance, to
+`#define`, say, a macro DOG as the number 3, but if you try to print the macro,
+thinking that DOG represents a string that you can show on the screen, the
+program will have an error. `#define` also has no regard for type. It disregards
+the structure of your program, replacing the text everywhere (in effect,
+disregarding scope), which could be advantageous in some circumstances, but can
+be the source of problematic bugs.
+
+You will see further instances of the `#define` directive later in the text. It
+is good convention to write `#defined` words in all capitals, so a programmer
+will know that this is not a variable that you have declared but a `#defined`
+macro. It is not necessary to end a preprocessor directive such as `#define`
+with a semicolon; in fact, some compilers may warn you about unnecessary tokens
+in your code if you do.
+
+
+### Scope
+
+In the Basic Concepts section, the concept of scope was introduced. It is
+important to revisit the distinction between local types and global types, and
+how to declare variables of each. To declare a local variable, you place the
+declaration at the beginning (i.e. before any non-declarative statements) of the
+block to which the variable is deemed to be local. To declare a global variable,
+declare the variable outside of any block. If a variable is global, it can be
+read, and written, from anywhere in your program.
+
+Global variables are not considered good programming practice, and should be
+avoided whenever possible. They inhibit code readability, create naming
+conflicts, waste memory, and can create difficult-to-trace bugs. Excessive usage
+of globals is usually a sign of laziness or poor design. However, if there is a
+situation where local variables may create more obtuse and unreadable code,
+there's no shame in using globals.
+
+
+### Other Modifiers
+
+Included here, for completeness, are more of the modifiers that standard C
+provides. For the beginning programmer, `static` and `extern` may be useful.
+`volatile` is more of interest to advanced programmers. `register` and `auto`
+are largely deprecated and are generally not of interest to either beginning or
+advanced programmers.
+
+
+#### static
+
+`static` is sometimes a useful keyword. It is a common misbelief that the only
+purpose is to make a variable stay in memory.
+
+When you declare a function or global variable as static, you cannot access the
+function or variable through the `extern` (see below) keyword from other files
+in your project. This is called _static linkage_.
+
+When you declare a local variable as static, it is created just like any other
+variable. However, when the variable goes out of scope (i.e. the block it was
+local to is finished) the variable stays in memory, retaining its value. The
+variable stays in memory until the program ends. While this behaviour resembles
+that of global variables, static variables still obey scope rules and therefore
+cannot be accessed outside of their scope. This is called
+_static storage duration_.
+
+Variables declared static are initialized to zero (or for pointers,
+`NULL`[^3][^4]) by default. They can be initialized explicitly on declaration to
+any constant value. The initialization is made just once, at compile time.
+
+You can use `static` in (at least) two different ways. Consider this code, and
+imagine it is in a file called `jfile.c`:
+
+``` c
+#include <stdio.h>
+
+static int j = 0;
+
+void up(void)
+{
+  /* k is set to 0 when the program starts. The line is then "ignored"
+   * for the rest of the program (i.e. k is not set to 0 every time up()
+   * is called)
+   */
+  static int k = 0;
+  j++;
+  k++;
+  printf("up() called.   k= %2d, j= %2d\n", k , j);
+}
+
+void down(void)
+{
+  static int k = 0;
+  j--;
+  k--;
+  printf("down() called. k= %2d, j= %2d\n", k , j);
+}
+
+int main(void)
+{
+  int i;
+
+  /* call the up function 3 times, then the down function 2 times */
+  for (i = 0; i < 3; i++)
+    up();
+  for (i = 0; i < 2; i++)
+    down();
+
+  return 0;
+}
+```
+@run
+
+The `j` variable is accessible by both up and down and retains its value. The
+`k` variables also retain their value, but they are two different variables, one
+in each of their scopes. Static variables are a good way to implement
+encapsulation, a term from the object-oriented way of thinking that effectively
+means not allowing changes to be made to a variable except through function
+calls.
+
+Running the program above will produce the following output:
+
+``` bash
+up() called.   k=  1, j=  1
+up() called.   k=  2, j=  2
+up() called.   k=  3, j=  3
+down() called. k= -1, j=  2
+down() called. k= -2, j=  1
+```
+
+__Features of static variables:__
+
+1. Keyword used        - `static`
+2. Storage             - Memory
+3. Default value       - Zero
+4. Scope               - Local to the block in which it is declared
+5. Lifetime            - Value persists between different function calls
+6. Keyword optionality - Mandatory to use the keyword
+
+[^3]: [\[1\]](http://c-faq.com/null/macro.html)
+      - What is `NULL` and how is it defined?
+[^4]: [\[2\]](http://c-faq.com/null/nullor0.html)
+      - `NULL` or `0`, which should you use?
+
+
+#### `extern`
+
+`extern` is used when a file needs to access a variable in another file that it
+may not have `#included` directly. Therefore, `extern` does not actually carve
+out space for a new variable, it just provides the compiler with sufficient
+information to access the remote variable.
+
+__Features of extern variable:__
+
+1. Keyword used        - extern
+2. Storage             - Memory
+3. Default value       - Zero
+4. Scope               - Global (all over the program)
+5. Lifetime            - Value persists till the program's execution comes to an end
+6. Keyword optionality - Optional if declared outside all the functions
+
+
+#### `volatile`
+
+`volatile` is a special type of modifier which informs the compiler that the
+value of the variable may be changed by external entities other than the program
+itself. This is necessary for certain programs compiled with optimizations – if
+a variable were not defined `volatile` then the compiler may assume that certain
+operations involving the variable are safe to optimize away when in fact they
+aren't. volatile is particularly relevant when working with embedded systems
+(where a program may not have complete control of a variable) and multi-threaded
+applications.
+
+
+#### `auto`
+
+`auto` is a modifier which specifies an "automatic" variable that is
+automatically created when in scope and destroyed when out of scope. If you
+think this sounds like pretty much what you've been doing all along when you
+declare a variable, you're right: all declared items within a block are
+implicitly "automatic". For this reason, the auto keyword is more like the
+answer to a trivia question than a useful modifier, and there are lots of very
+competent programmers that are unaware of its existence.
+
+__Features of automatic variables:__
+
+1. Keyword used        - `auto`
+2. Storage             - Memory
+3. Default value       - Garbage value (random value)
+4. Scope               - Local to the block in which it is defined
+5. Lifetime            - Value persists while the control remains within the block
+6. Keyword optionality - Optional
+
+
+#### `register`
+
+`register` is a hint to the compiler to attempt to optimize the storage of the
+given variable by storing it in a register of the computer's CPU when the
+program is run. Most optimizing compilers do this anyway, so use of this keyword
+is often unnecessary. In fact, ANSI C states that a compiler can ignore this
+keyword if it so desires – and many do. Microsoft Visual C++ is an example of an
+implementation that completely ignores the register keyword.
+
+__Features of `register` variables:__
+
+1. Keyword used        - `register`
+2. Storage             - CPU registers (values can be retrieved faster than from memory)
+3. Default value       - Garbage value
+4. Scope               - Local to the block in which it is defined
+5. Lifetime            - Value persists while the control remains within the block
+6. Keyword optionality - Mandatory to use the keyword
+
+
+### Concepts
+
+* [Variables](https://en.wikibooks.org/wiki/Computer_Programming/Variables)
+* [Types](https://en.wikibooks.org/wiki/Computer_Programming/Types)
+* [Data Structures](https://en.wikibooks.org/wiki/Data_Structures)
+* [Arrays](https://en.wikibooks.org/wiki/Data_Structures/Arrays)
+
+
+### In this section
+
+* C variables
+  * [C arrays](https://en.wikibooks.org/wiki/C_Programming/Arrays)
+
+
+## Simple input and output
+
+When you take time to consider it, a computer would be pretty useless without
+some way to talk to the people who use it. Just like we need information in
+order to accomplish tasks, so do computers. And just as we supply information to
+others so that they can do tasks, so do computers.
+
+These supplies and returns of information to a computer are called __input__ and
+__output__. 'Input' is information supplied to a computer or program. 'Output'
+is information provided by a computer or program. Frequently, computer
+programmers will lump the discussion in the more general term _input/output_ or
+simply, __I/O__.
+
+In C, there are many different ways for a program to communicate with the user.
+Amazingly, the most simple methods usually taught to beginning programmers may
+also be the most powerful. In the Hello, World! example at the beginning of this
+text, we were introduced to a Standard Library file `stdio.h`, and one of its
+functions, `printf()`. Here we discuss more of the functions that `stdio.h`
+gives us.
+
+### Output using `printf()`
+
+Recall from the beginning of this text the demonstration program duplicated
+below:
+
+``` c
+#include <stdio.h>
+
+int main(void)
+{
+  printf("Hello, World!");
+  return 0;
+}
+```
+@run
+
+If you compile and run this program, you will see the sentence below show up on
+your screen:
+
+``` bash
+Hello, World!
+```
+
+This amazing accomplishment was achieved by using the function `printf()`. A
+function is like a "black box" that does something for you without exposing the
+internals inside. We can write functions ourselves in C, but we will cover that
+later.
+
+You have seen that to use `printf()` one puts text, surrounded by quotes, in
+between the parentheses. We call the text surrounded by quotes a
+__literal string__ (or just a string), and we call that string an argument to
+`printf`.
+
+As a note of explanation, it is sometimes convenient to include the open and
+closing parentheses after a function name to remind us that it is, indeed, a
+function. However usually when the name of the function we are talking about is
+understood, it is not necessary.
+
+As you can see in the example above, using `printf()` can be as simple as typing
+in some text, surrounded by double quotes (note that these are double quotes and
+not two single quotes). So, for example, you can print any string by placing it
+as an argument to the printf() function:
+
+
+```c
+printf("This sentence will print out exactly as you see it...");
+```
+
+And once it is contained in a proper main() function, it will show:
+
+``` bash
+This sentence will print out exactly as you see it...
+```
+
+
+#### Printing numbers and escape sequences
+
+##### Placeholder codes
+
+The `printf()` function is a powerful function, and is probably the most-used
+function in C programs.
+
+For example, let us look at a problem. Say we want to calculate: 19 + 31. Let's
+use C to get the answer.
+
+We start writing
+
+``` c
+#include "stdio.h" // this is important, since printf
+                   // can't be used without this header
+
+int main(void)
+{
+  printf("19+31 is");
+```
+
+But here we are stuck! `printf()` only prints strings! Thankfully, `printf` has
+methods for printing numbers. What we do is put a placeholder format code in the
+string. We write:
+
+``` c
+printf("19+31 is '''%d'''", 19+31);
+```
+
+The placeholder `%d` literally "holds the place" for the actual number that is
+the result of adding 19 to 31.
+
+These placeholders are called format specifiers. Many other format specifiers
+work with `printf()`. If we have a floating-point number, we can use `%f` to
+print out a floating-point number, decimal point and all. Other format
+specifiers are:
+
+* `%d` - `int` (same as `%i`)
+* `%ld` - `long int` (same as `%li`)
+* `%f` - `float`
+* `%lf` - `double`[^1]
+* `%c` - `char`
+* `%s` - `string`
+* `%x` - hexadecimal
+
+A complete listing of all the format specifiers for `printf()` is on Wikipedia.
+
+[^1]: Actually `%f` prints doubles as well, but the use of %f for input is
+      different. For more details, see the
+      [Wikipedia article on C data types](https://en.wikipedia.org/wiki/C_data_types).
+
+
+##### Tabs and newlines
+
+What if, we want to achieve some output that will look like:
+
+```
+   1905
+  312 +
+  -----
+```
+
+`printf()` will not put line breaks in at the end of each statement: we must do
+this ourselves. But how?
+
+What we can do is use the newline __escape character__. An escape character is a
+special character that we can write but will do something special onscreen, such
+as make a beep, write a tab, and so on. To write a newline we write `\n`. All
+escape characters start with a backslash.
+
+So to achieve the output above, we write
+
+``` c
+printf(" 1905\n312 +\n-----\n");
+```
+
+or to be a bit more clear, we can break this long `printf` statement over
+several lines. So our program will be
+
+``` c
+#include <stdio.h>
+
+int main(void)
+{
+    printf(" 1905\n");
+    printf("312 +\n");
+    printf("-----\n");
+    printf("%d", 1905+312);
+    return 0;
+}
+```
+@run
+
+There are
+[other escape characters](https://en.wikibooks.org/wiki/C_Programming/Strings#backslash_escapes)
+we can use. Another common one is to use `\t` to write a tab. You can use `\a`
+to ring the computer's bell, but you should not use this very much in your
+programs, as excessive use of sound is not very friendly to the user.
+
+
+### Other output methods
+
+#### `puts()`
+
+The `puts()` function is a very simple way to send a string to the screen when
+you have no placeholders or variables to be concerned about. It works very much
+like the `printf()` function we saw in the `"Hello, World!"` example:
+
+``` c
+puts("Print this string."");
+```
+
+will print to the screen:
+
+``` bash
+Print this string.
+```
+
+followed by the newline character (as discussed above). (The `puts` function
+appends a newline character to its output.)
+
+
+### Input using `scanf()`
+
+The `scanf()` function is the input method equivalent to the `printf()` output
+function - simple yet powerful. In its simplest invocation, the `scanf` format
+string holds a single placeholder representing the type of value that will be
+entered by the user. These placeholders are mostly the same as the `printf()`
+function - `%d` for integers, `%f` for floats, and `%lf` for doubles.
+
+There is, however, one variation to `scanf()` as compared to `printf()`. The
+`scanf()` function requires the memory address of the variable to which you want
+to save the input value. While _pointers_ (variables storing memory addresses)
+can be used here, this is a concept that won't be approached until later in the
+text. Instead, the simple technique is to use the __address-of__ operator, `&`.
+For now it may be best to consider this "magic" before we discuss
+[pointers](https://en.wikipedia.org/wiki/Pointer_%28computer_programming%29).
+
+A typical application might be like this:
+
+``` c
+#include "stdio.h"
+
+int main(void)
+{
+  int a;
+
+  printf("Please input an integer value: ");
+  scanf("%d", &a);
+  printf("You entered: %d\n", a);
+
+  return 0;
+}
+```
+@run
+
+If you were to describe the effect of the `scanf()` function call above, it might
+read as: "Read in an integer from the user and store it at the address of
+variable a ".
+
+If you are trying to input a string using `scanf`, you should __not__ include
+the `&` operator. The code below will produce a runtime error and the program
+will likely crash.
+
+``` c
+scanf("%s", &a);
+```
+
+The correct usage would be:
+
+``` c
+scanf("%s", a);
+```
+
+This is because, whenever you use a format specifier for a string (`%s`), the
+variable that you use to store the value will be an array and, the array names
+(in this case - a) themselves point out to their base address and hence, the
+__address of__ operator is not required.
+
+(Although, this is vulnerable to
+[Buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow). `fgets()` is
+preferred to `scanf()`).
+
+__Note on inputs:__ When data is typed at a keyboard, the information does not
+go straight to the program that is running. It is first stored in what is known
+as a __buffer__ - a small amount of memory reserved for the input source.
+Sometimes there will be data left in the buffer when the program wants to read
+from the input source, and the `scanf()` function will read this data instead of
+waiting for the user to type something. Some may suggest you use the function
+`fflush(stdin)`, which may work as desired on some computers, but isn't
+considered good practice, as you will see later. Doing this has the downfall
+that if you take your code to a different computer with a different compiler,
+your code may not work properly.
+
+
+## Operators and type casting
+
+
+### Operators and Assignments
+
+C has a wide range of operators that make simple math easy to handle. The list
+of operators grouped into precedence levels is as follows:
+
+
+#### Primary expressions
+
+_Identifiers_ are names of things in C, and consist of either a letter or an
+underscore ( `_` ) optionally followed by letters, digits, or underscores. An
+identifier (or variable name) is a primary expression, provided that it has been
+declared as designating an object (in which case it is an lvalue [a value that
+can be used as the left side of an assignment expression]) or a function (in
+which case it is a function designator).
+
+A _constant_ is a primary expression. Its type depends on its form and value.
+The types of constants are character constants (e.g. `' '` is a space), integer
+constants (e.g. `2`), floating-point constants (e.g. `0.5`), and enumerated
+constants that have been previously defined via `enum`.
+
+A _string literal_ is a primary expression. It consists of a string of
+characters within double quotes ( `"` ).
+
+A parenthesized expression is a primary expression. It consists of an expression
+within parentheses ( `( )` ). Its type and value are those of the
+non-parenthesized expression within the parentheses.
+
+In C11, an expression that starts with `_Generic` followed by (, an initial
+_expression_, a list of values of the form type: expression where type is either
+a named type or the keyword default, and ) constitute a primary expression. The
+value is the expression that follows the type of the initial expression or the
+default if not found.
+
+
+#### Postfix operators
+
+First, a primary expression is also a postfix expression. The following
+expressions are also postfix expressions:
+
+A postfix expression followed by a left square bracket (`[`), an expression, and
+a right square bracket (`]`) in sequence constitutes an invocation of the
+_array subscript_ operator. One of the expressions shall have type "pointer to
+object type" and the other shall have an integer type; the result type is type.
+Successive array subscript operators designate an element of a multidimensional
+array.
+
+A postfix expression followed by parentheses or an optional parenthesized
+argument list indicates an invocation of the _function call_ operator. The value
+of the function call operator is the return value of the function called with
+the provided arguments. The parameters to the function are copied on the stack
+__by value__ (or at least the compiler acts as if that is what happens; if the
+programmer wanted the parameter to be copied by reference, then it is easier to
+pass the address of the area to be modified by value, then the called function
+can access the area through the respective pointer). The trend for compilers is
+to pass the parameters from right to left onto the stack, but this is not
+universal.
+
+A postfix expression followed by a dot (`.`) followed by an identifier selects a
+member from a structure or union; a postfix expression followed by an arrow (`->`)
+followed by an identifier selects a member from a structure or union who is
+pointed to by the pointer on the left-hand side of the expression.
+
+A postfix expression followed by the increment or decrement operators (`++` or `--`
+respectively) indicates that the variable is to be incremented or decremented as
+a side effect. The value of the expression is the value of the postfix
+expression before the increment or decrement. These operators only work on
+integers and pointers.
+
+
+#### Unary expressions
+
+First, a postfix expression is a unary expression. The following expressions are
+all unary expressions:
+
+The increment or decrement operators followed by a unary expression is a unary
+expression. The value of the expression is the value of the unary expression
+_after_ the increment or decrement. These operators only work on integers and
+pointers.
+
+The following operators followed by a cast expression are unary expressions:
+
+| Operator | Meaning                                              |
+|:--------:|------------------------------------------------------|
+|   `&`    | Address-of; value is the location of the operand     |
+|   `*`    | Contents-of; value is what is stored at the location |
+|   `-`    | Negation                                             |
+|   `+`    | Value-of operator                                    |
+|   `!`    | Logical negation ((`!E`) is equivalent to (`0==E`))  |
+|   `~`    | Bit-wise complement                                  |
+
+The keyword `sizeof` followed by a unary expression is a unary expression. The
+value is the size of the type of the expression in bytes. The expression is not
+evaluated.
+
+The keyword `sizeof` followed by a parenthesized type name is a unary
+expression. The value is the size of the type in bytes.
+
+
+#### Cast operators
+
+A cast expression is a unary expression.
+
+A parenthesized type name followed by any expression, including literals, is a
+cast expression. The parenthesized type name has the effect of forcing the cast
+expression into the type specified by the type name in parentheses. For
+arithmetic types, this either does not change the value of the expression, or
+truncates the value of the expression if the expression is an integer and the
+new type is smaller than the previous type.
+
+An example of casting a float as an int:
+
+``` c
+float pi = 3.141592;
+int truncated_pi = (int) pi; // truncated_pi == 3
+```
+
+An example of casting a char as an int:
+
+```c
+char my_char = 'A';
+int my_int = (int) my_char; // On machines which use ASCII as the character set, my_int == 65
+```
+
+
+#### Multiplicative and additive operators
+
+In C, simple math is very easy to handle. The following operators exist: `+`
+(addition), `-` (subtraction), `*` (multiplication), / (division), and `%`
+(modulus); You likely know all of them from your math classes - except, perhaps,
+modulus. It returns the remainder of a division (e.g. `5 % 2 = 1`). (Modulus is
+not defined for floating-point numbers, but the `math.h` library has an `fmod`
+function.)
+
+Care must be taken with the modulus, because it's not the equivalent of the
+mathematical modulus: `(-5) % 2` is not `1`, but `-1`. Division of integers will
+return an integer, and the division of a negative integer by a positive integer
+will round towards zero instead of rounding down (e.g. `(-5) / 3 = -1` instead
+of `-2`). However, it is always true that for all integer a and nonzero integer
+`b`, `((a / b) * b) + (a % b) == a`.
+
+There is no inline operator to do exponentiation (e.g. `5 ^ 2` is __not__ `25`
+[it is `7`; `^` is the exclusive-or operator], and `5 ** 2` is an error), but
+there is a power function.
+
+The mathematical order of operations does apply. For example `(2 + 3) * 2 = 10`
+while `2 + 3 * 2 = 8`. Multiplicative operators have precedence over additive
+operators.
+
+``` c
+#include <stdio.h>
+
+int main(void)
+{
+int i = 0, j = 0;
+
+  // while i is less than 5 AND j is less than 5, loop
+  while( (i < 5) && (j < 5) )
+  {
+    // postfix increment, i++
+    //     the value of i is read and then incremented
+    printf("i: %d\t", i++);
+
+    // prefix increment, ++j
+    //      the value of j is incremented and then read
+    printf("j: %d\n", ++j);
+  }
+
+  printf("At the end they have both equal values:\ni: %d\tj: %d\n", i, j);
+
+  getchar(); // pause
+  return 0;
+}
+```
+@run
+
+will display the following:
+
+``` bash
+i: 0    j: 1
+i: 1    j: 2
+i: 2    j: 3
+i: 3    j: 4
+i: 4    j: 5
+At the end they have both equal values:
+i: 5    j: 5
+```
+
+
+#### The shift operators (which may be used to rotate bits)
+
+Shift functions are often used in low-level I/O hardware interfacing. Shift and
+rotate functions are heavily used in cryptography and software floating point
+emulation. Other than that, shifts can be used in place of division or
+multiplication by a power of two. Many processors have dedicated function blocks
+to make these operations fast -- see
+[Microprocessor Design/Shift and Rotate Blocks](https://en.wikibooks.org/wiki/X86_Assembly/Shift_and_Rotate).
+On processors which have such blocks, most C compilers compile shift and rotate
+operators to a single assembly-language instruction -- see
+[X86 Assembly/Shift and Rotate](https://en.wikibooks.org/wiki/X86_Assembly/Shift_and_Rotate).
+
+
+##### shift left
+
+The `<<` operator shifts the binary representation to the left, dropping the
+most significant bits and appending it with zero bits. The result is equivalent
+to multiplying the integer by a power of two.
+
+
+##### unsigned shift right
+
+The unsigned shift right operator, also sometimes called the logical right shift
+operator. It shifts the binary representation to the right, dropping the least
+significant bits and prepending it with zeros. The `>>` operator is equivalent
+to division by a power of two for unsigned integers.
+
+
+##### signed shift right
+
+The signed shift right operator, also sometimes called the arithmetic right
+shift operator. It shifts the binary representation to the right, dropping the
+least significant bit, but prepending it with copies of the original sign bit.
+The `>>` operator is not equivalent to division for signed integers.
+
+In C, the behavior of the `>>` operator depends on the data type it acts on.
+Therefore, a signed and an unsigned right shift looks exactly the same, but
+produces a different result in some cases.
+
+
+##### rotate right
+
+Contrary to popular belief, it is possible to write C code that compiles down to the "rotate" assembly language instruction (on CPUs that have such an instruction).
+
+Most compilers recognize this idiom:
+
+``` c
+unsigned int x;
+unsigned int y;
+/* ... */
+y = (x >> shift) | (x << (32 - shift));
+```
+
+and compile it to a single 32 bit rotate instruction. [^1] [^2]
+
+On some systems, this may be `#define`ed as a macro or defined as an inline
+function called something like `rightrotate32` or `rotr32` or `ror32` in a
+standard header file like `bitops.h`. [^3]
+
+
+[^1]: [GCC: "Optimize common rotate constructs"](http://gcc.gnu.org/ml/gcc-patches/2007-11/msg01112.html)
+
+[^2]: ["Cleanups in ROTL/ROTR DAG combiner code"](http://www.mail-archive.com/llvm-commits@cs.uiuc.edu/msg17216.html)
+      mentions that this code supports the "rotate" instruction in the CellSPU
+
+[^3]: ["replace private copy of bit rotation routines"](http://archive.is/20130415063059/kerneltrap.org/mailarchive/linux-kernel/2008/4/15/1440064) --
+      recommends including `"bitops.h"` and using its `rol32` and `ror32` rather
+      than copy-and-paste into a new program.
+
+
+##### rotate left
+
+Most compilers recognize this idiom:
+
+``` c
+unsigned int x;
+unsigned int y;
+/* ... */
+y = (x << shift) | (x >> (32 - shift));
+```
+
+and compile it to a single 32 bit rotate instruction.
+
+On some systems, this may be `#define`ed as a macro or defined as an inline
+function called something like `leftrotate32` or `rotl32` in a header file like
+`"bitops.h"`.
+
+
+#### Relational and equality operators
+
+The relational binary operators `<` (less than), `>` (greater than), `<=` (less
+than or equal), and `>=` (greater than or equal) operators return a value of 1
+if the result of the operation is true, 0 if false.
+
+The equality binary operators `==` (equals) and `!=` (not equals) operators are
+similar to the relational operators except that their precedence is lower.
+
+
+#### Bitwise operators
+
+The bitwise operators are `&` (and), `^` (exclusive or) and `|` (inclusive or).
+The `&` operator has higher precedence than `^`, which has higher precedence
+than `|`.
+
+The values being operated upon must be integral; the result is integral.
+
+One use for the bitwise operators is to emulate bit flags. These flags can be
+set with OR, tested with AND, flipped with XOR, and cleared with AND NOT. For
+example:
+
+``` c
+/* This code is a sample for bitwise operations.  */
+#define BITFLAG1    (1)
+#define BITFLAG2    (2)
+#define BITFLAG3    (4) /* They are powers of 2 */
+
+unsigned bitbucket = 0U;    /* Clear all */
+bitbucket |= BITFLAG1;      /* Set bit flag 1 */
+bitbucket &= ~BITFLAG2;     /* Clear bit flag 2 */
+bitbucket ^= BITFLAG3;      /* Flip the state of bit flag 3 from off to on or
+                               vice versa */
+if (bitbucket & BITFLAG3) {
+  // bit flag 3 is set
+} else {
+  // bit flag 3 is not set
+}
+```
+
+
+#### Logical operators
+
+The logical operators are `&&` (and), and `||` (or). Both of these operators
+produce 1 if the relationship is true and 0 for false. Both of these operators
+short-circuit; if the result of the expression can be determined from the first
+operand, the second is ignored. The && operator has higher precedence than the `||`
+operator.
+
+`&&` is used to evaluate expressions left to right, and returns a 1 if both
+statements are true, 0 if either of them are false. If the first expression is
+false, the second is not evaluated.
+
+``` c
+int x = 7;
+int y = 5;
+if(x == 7 && y == 5) {
+  ...
+}
+```
+
+Here, the `&&` operator checks the left-most expression, then the expression to
+its right. If there were more than two expressions chained (e.g. `x && y && z`),
+the operator would check `x` first, then `y` (if `x` is nonzero), then continue
+rightwards to `z` if neither `x` or `y` is zero. Since both statements return
+true, the `&&` operator returns true, and the code block is executed.
+
+``` c
+if(x == 5 && y == 5) {
+  ...
+}
+```
+
+The && operator checks in the same way as before, and finds that the first
+expression is false. The `&&` operator stops evaluating as soon as it finds a
+statement to be false, and returns a false.
+
+
+`||` is used to evaluate expressions left to right, and returns a 1 if either of
+the expressions are true, 0 if both are false. If the first expression is true,
+the second expression is not evaluated.
+
+``` c
+/* Use the same variables as before. */
+if(x == 2 || y == 5) { // the || statement checks both expressions, finds that the latter is true, and returns true
+  ...
+}
+```
+
+The `||` operator here checks the left-most expression, finds it false, but
+continues to evaluate the next expression. It finds that the next expression
+returns true, stops, and returns a 1. Much how the `&&` operator ceases when it
+finds an expression that returns false, the `||` operator ceases when it finds
+an expression that returns true.
+
+It is worth noting that C does not have Boolean values (true and false) commonly
+found in other languages. It instead interprets a 0 as false, and any nonzero
+value as true.
+
+
+#### Conditional operators
+
+The ternary ?: operator is the conditional operator. The expression (`x ? y : z`)
+has the value of `y` if `x` is nonzero, `z` otherwise.
+
+Example:
+
+``` c
+int x = 0;
+int y;
+y = (x ? 10 : 6); /* The parentheses are technically not necessary as assignment
+                     has a lower precedence than the conditional operator, but
+                     it's there for clarity.  */
+```
+
+The expression x evaluates to 0. The ternary operator then looks for the
+"if-false" value, which in this case, is 6. It returns that, so `y` is equal to
+six. Had `x` been a non-zero, then the expression would have returned a 10.
+
+
+#### Assignment operators
+
+The assignment operators are `=`, `*=`, `/=`, `%=`, `+=`, `-=`, `<<=`, `>>=`, `&=`, `^=`,
+and `|=`. The `=` operator stores the value of the right operand into the
+location determined by the left operand, which must be an
+[lvalue](https://en.wikibooks.org/w/index.php?title=Lvalue&action=edit&redlink=1)
+(a value that has an address, and therefore can be assigned to).
+
+For the others, `x op= y` is shorthand for `x = x op (y)`. Hence, the following
+expressions are the same:
+
+1. `x += y`     -->     `x = x+y`
+2. `x -= y`     -->     `x = x-y`
+3. `x *= y`     -->     `x = x*y`
+4. `x /= y`     -->     `x = x/y`
+5. `x %= y`     -->     `x = x%y`
+
+The value of the assignment expression is the value of the left operand after
+the assignment. Thus, assignments can be chained; e.g. the expression
+`a = b = c = 0;` would assign the value zero to all three variables.
+
+
+#### Comma operator
+
+The operator with the least precedence is the comma operator. The value of the
+expression `x`, `y` will evaluate both `x` and `y`, but provides the value of `y`.
+
+This operator is useful for including multiple actions in one statement (e.g.
+within a for loop conditional).
+
+Here is a small example of the comma operator:
+
+``` c
+int i, x;      /* Declares two ints, i and x, in one declaration.
+                  Technically, this is not the comma operator. */
+
+/* this loop initializes x and i to 0, then runs the loop */
+for (x = 0, i = 0; i <= 6; i++) {
+  printf("x = %d, and i = %d\n", x, i);
+}
+```
+
+
+## Arrays and strings
+
+Arrays in C act to store related data under a single variable name with an
+index, also known as a subscript. It is easiest to think of an array as simply a
+list or ordered grouping for variables of the same type. As such, arrays often
+help a programmer organize collections of data efficiently and intuitively.
+
+Later we will consider the concept of a pointer, fundamental to C, which extends
+the nature of the array (array can be termed as a constant pointer). For now, we
+will consider just their declaration and their use.
+
+### Arrays
+
+C arrays are declared in the following form:
+
+``` c
+type name[number of elements];
+```
+
+For example, if we want an array of six integers (or whole numbers), we write in
+C:
+
+``` c
+int numbers[6];
+```
+
+For a six character array called letters,
+
+``` c
+char letters[6];
+```
+
+and so on.
+
+You can also initialize as you declare. Just put the initial elements in curly
+brackets separated by commas as the initial value:
+
+``` c
+type name[number of elements]={comma-separated values}
+```
+
+For example, if we want to initialize an array with six integers, with 0, 0, 1,
+0, 0, 0 as the initial values:
+
+``` c
+int point[6]={0,0,1,0,0,0};
+```
+
+Though when the array is initialized as in this case, the array dimension may be
+omitted, and the array will be automatically sized to hold the initial data:
+
+``` c
+int point[]={0,0,1,0,0,0};
+```
+
+This is very useful in that the size of the array can be controlled by simply
+adding or removing initializer elements from the definition without the need to
+adjust the dimension.
+
+If the dimension is specified, but not all elements in the array are
+initialized, the remaining elements will contain a value of 0. This is very
+useful, especially when we have very large arrays.
+
+``` c
+int numbers[2000]={245};
+```
+
+The above example sets the first value of the array to 245, and the rest to 0.
+
+If we want to access a variable stored in an array, for example with the above
+declaration, the following code will store a 1 in the variable `x`
+
+``` c
+int x;
+x = point[2];
+```
+
+Arrays in C are indexed starting at 0, as opposed to starting at 1. The first
+element of the array above is `point[0]`. The index to the last value in the array
+is the array size minus one. In the example above the subscripts run from 0
+through 5. C does not guarantee bounds checking on array accesses. The compiler
+may not complain about the following (though the best compilers do):
+
+``` c
+char y;
+int z = 9;
+char point[6] = { 1, 2, 3, 4, 5, 6 };
+//examples of accessing outside the array. A compile error is not always raised
+y = point[15];
+y = point[-4];
+y = point[z];
+```
+
+During program execution, an out of bounds array access does not always cause a
+run time error. Your program may happily continue after retrieving a value from
+`point[-1]`. To alleviate indexing problems, the `sizeof()` expression is
+commonly used when coding loops that process arrays.
+
+Many people use a macro that in turn uses `sizeof()` to find the number of
+elements in an array, a macro variously named "`lengthof()`",[^1]
+"`MY_ARRAY_SIZE()`" or "`NUM_ELEM()`",[^2] "`SIZEOF_STATIC_ARRAY()`",[^3] etc.
+
+``` c
+int ix;
+short anArray[]= { 3, 6, 9, 12, 15 };
+
+for (ix=0; ix< (sizeof(anArray)/sizeof(short)); ++ix) {
+  DoSomethingWith("%d", anArray[ix] );
+}
+```
+
+Notice in the above example, the size of the array was not explicitly specified.
+The compiler knows to size it at 5 because of the five values in the initializer
+list. Adding an additional value to the list will cause it to be sized to six,
+and because of the sizeof expression in the for loop, the code automatically
+adjusts to this change. Good programming practice is to declare a variable
+_size_, and store the number of elements in the array in it.
+
+``` c
+size = sizeof(anArray)/sizeof(short)
+```
+
+C also supports multi dimensional arrays (or, rather, arrays of arrays). The
+simplest type is a two dimensional array. This creates a rectangular array -
+each row has the same number of columns. To get a char array with 3 rows and 5
+columns we write in C
+
+``` c
+char two_d[3][5];
+```
+
+To access/modify a value in this array we need two subscripts:
+
+``` c
+char ch;
+ch = two_d[2][4];
+```
+
+or
+
+``` c
+two_d[0][0] = 'x';
+```
+
+Similarly, a multi-dimensional array can be initialized like this:
+
+``` c
+int two_d[2][3] = {{ 5, 2, 1 },
+                   { 6, 7, 8 }};
+```
+
+The amount of columns must be explicitly stated; however, the compiler will find
+the appropriate amount of rows based on the initializer list.
+
+There are also weird notations possible:
+
+``` c
+int a[100];
+int i = 0;
+if (a[i]==i[a])
+{
+  printf("Hello world!\n");
+}
+```
+
+`a[i]` and `i[a]` refer to the same location. (This is explained later in the
+next Chapter.)
+
+[^1]: Pádraig Brady.
+      ["C and C++ notes"](http://www.pixelbeat.org/programming/gcc/c_c++_notes.html).
+
+[^2]: [C Programming/Pointers and arrays](https://en.wikibooks.org/wiki/C_Programming/Pointers_and_arrays)
+
+[^3]: [MINC/Reference/MINC1-volumeio-programmers-reference](https://en.wikibooks.org/wiki/MINC/Reference/MINC1-volumeio-programmers-reference)
+
+### Strings
+
+C has no string handling facilities built in; consequently, strings are defined
+as arrays of characters. C allows a character array to be represented by a
+character string rather than a list of characters, with the null terminating
+character automatically added to the end. For example, to store the string
+"Merkkijono", we would write
+
+``` c
+char string[11] = "Merkkijono";
+```
+
+or
+
+``` c
+char string[11] = {'M', 'e', 'r', 'k', 'k', 'i', 'j', 'o', 'n', 'o', '\0'};
+```
+
+> String "Merkkijono" stored in memory
+>
+> ``````````
+>   0   1   2   3   4   5   6   7   8   9   10
+> +---+---+---+---+---+---+---+---+---+---+----+
+> | M | e | r | k | k | i | j | o | n | o | \0 |
+> +---+---+---+---+---+---+---+---+---+---+----+
+> ``````````
+
+In the first example, the string will have a null character automatically
+appended to the end by the compiler; by convention, library functions expect
+strings to be terminated by a null character. The latter declaration indicates
+individual elements, and as such the null terminator needs to be added manually.
+
+Strings do not always have to be linked to an explicit variable. As you have
+seen already, a string of characters can be created directly as an unnamed
+string that is used directly (as with the `printf` functions.)
+
+To create an extra long string, you will have to split the string into multiple
+sections, by closing the first section with a quote, and recommencing the string
+on the next line (also starting and ending in a quote):
+
+``` c
+char string[58] = "This is a very, very long "
+                "string that requires two lines.";
+```
+
+While strings may also span multiple lines by putting the backslash character at
+the end of the line, this method is deprecated.
+
+There is a useful library of string handling routines which you can use by
+including another header file.
+
+``` c
+#include <string.h>  //new header file
+```
+
+This standard string library will allow various tasks to be performed on
+strings, and is discussed in the Strings chapter.
+
+
+## Program flow control
+
+Very few programs follow exactly one control path and have each instruction
+stated explicitly. In order to program effectively, it is necessary to
+understand how one can alter the steps taken by a program due to user input or
+other conditions, how some steps can be executed many times with few lines of
+code, and how programs can appear to demonstrate a rudimentary grasp of logic. C
+constructs known as conditionals and loops grant this power.
+
+From this point forward, it is necessary to understand what is usually meant by
+the word block. A block is a group of code statements that are associated and
+intended to be executed as a unit. In C, the beginning of a block of code is
+denoted with `{` (left curly), and the end of a block is denoted with `}`. It is
+not necessary to place a semicolon after the end of a block. Blocks can be
+empty, as in `{}`. Blocks can also be nested; i.e. there can be blocks of code
+within larger blocks.
+
+
+### Conditionals
+
+There is likely no meaningful program written in which a computer does not
+demonstrate basic decision-making skills. It can actually be argued that there
+is no meaningful human activity in which some sort of decision-making,
+instinctual or otherwise, does not take place. For example, when driving a car
+and approaching a traffic light, one does not think, "I will continue driving
+through the intersection." Rather, one thinks, "I will stop if the light is red,
+go if the light is green, and if yellow go only if I am traveling at a certain
+speed a certain distance from the intersection." These kinds of processes can be
+simulated in C using conditionals.
+
+A conditional is a statement that instructs the computer to execute a certain
+block of code or alter certain data only if a specific condition has been met.
+The most common conditional is the If-Else statement, with conditional
+expressions and Switch-Case statements typically used as more shorthanded
+methods.
+
+Before one can understand conditional statements, it is first necessary to
+understand how C expresses logical relations. C treats logic as being
+arithmetic. The value 0 (zero) represents false, and ___all other values___
+represent true. If you chose some particular value to represent true and then
+compare values against it, sooner or later your code will fail when your assumed
+value (often 1) turns out to be incorrect. Code written by people uncomfortable
+with the C language can often be identified by the usage of `#define` to make a
+"TRUE" value. [^1]
+
+Because logic is arithmetic in C, arithmetic operators and logical operators are
+one and the same. Nevertheless, there are a number of operators that are
+typically associated with logic:
+
+[^1]: [C FAQ](http://www.c-faq.com/bool/bool2.html)
+
+
+#### Relational and Equivalence Expressions
+
+|Expression| Explained                                              |
+|:--------:|--------------------------------------------------------|
+| `a < b`  | 1 if `a` is less than `b`, 0 otherwise.                |
+| `a > b`  | 1 if `a` is greater than `b`, 0 otherwise.             |
+| `a <= b` | 1 if `a` is less than or equal to `b`, 0 otherwise.    |
+| `a >= b` | 1 if `a` is greater than or equal to `b`, 0 otherwise. |
+| `a == b` | 1 if `a` is equal to `b`, 0 otherwise.                 |
+| `a != b` | 1 if `a` is not equal to `b`, 0 otherwise.             |
+
+New programmers should take special note of the fact that the "equal to"
+operator is `==,` not `=`. This is the cause of numerous coding mistakes and is
+often a difficult-to-find bug, as the expression (`a = b`) sets a equal to b and
+subsequently evaluates to b; but the expression (`a == b`), which is usually
+intended, checks if a is equal to b. It needs to be pointed out that, if you
+confuse `=` with `==`, your mistake will often not be brought to your attention
+by the compiler. A statement such as `if (c = 20) {}` is considered perfectly
+valid by the language, but will always assign 20 to c and evaluate as true. A
+simple technique to avoid this kind of bug (in many, not all cases) is to put
+the constant first. This will cause the compiler to issue an error, if `==` got
+misspelled with `=`.
+
+Note that C does not have a dedicated boolean type as many other languages do. 0
+means false and anything else true. So the following are equivalent:
+
+``` c
+if (foo()) {
+  // do something
+}
+``` c
+
+and
+
+``` c
+if (foo() != 0) {
+  // do something
+}
+```
+
+Often `#define TRUE 1` and `#define FALSE 0` are used to work around the lack of
+a boolean type. This is bad practice, since it makes assumptions that do not
+hold. It is a better idea to indicate what you are actually expecting as a
+result from a function call, as there are many different ways of indicating
+error conditions, depending on the situation.
+
+``` c
+if (strstr("foo", bar) >= 0) {
+  // bar contains "foo"
+}
+```
+
+Here, `strstr` returns the index where the substring foo is found and -1 if it
+was not found. Note that this would fail with the TRUE definition mentioned in
+the previous paragraph. It would also not produce the expected results if we
+omitted the `>= 0`.
+
+One other thing to note is that the relational expressions do not evaluate as
+they would in mathematical texts. That is, an expression `myMin < value < myMax`
+does not evaluate as you probably think it might. Mathematically, this would
+test whether or not value is between `myMin` and `myMax`. But in C, what happens
+is that value is first compared with `myMin`. This produces either a 0 or a 1.
+It is this value that is compared against `myMax`. Example:
+
+``` c
+int value = 20;
+/* ... */
+if (0 < value < 10) { // don't do this! it always evaluates to "true"!
+  // do some stuff ...
+}
+```
+
+Because value is greater than 0, the first comparison produces a `value` of 1.
+Now 1 is compared to be less than 10, which is true, so the statements in the if
+are executed. This probably is not what the programmer expected. The appropriate
+code would be
+
+``` c
+int value = 20;
+/* ... */
+if (0 < value && value < 10) {   // the && means "and"
+  // do some stuff ...
+}
+```
+
+
+#### Logical Expressions
+
+|Expression| Explained                                              |
+|:--------:|--------------------------------------------------------|
+| `a||b` | when EITHER `a` or `b` is true (or both), the result is 1, otherwise the result is 0. |
+| `a&&b` | when BOTH `a` and `b` are true, the result is 1, otherwise the result is 0. |
+|  `!a`  | when `a` is true, the result is 0, when `a` is 0, the result is 1. |
+
+
+Here's an example of a larger logical expression. In the statement:
+
+``` c
+  e = ((a && b) || (c > d));
+```
+
+`e` is set equal to 1 if `a` and `b` are non-zero, or if `c` is greater than
+`d`. In all other cases, `e` is set to 0.
+
+C uses short circuit evaluation of logical expressions. That is to say, once it
+is able to determine the truth of a logical expression, it does no further
+evaluation. This is often useful as in the following:
+
+``` c
+int myArray[12];
+....
+if (i < 12 && myArray[i] > 3) {
+....
+```
+
+In the snippet of code, the comparison of `i` with 12 is done first. If it
+evaluates to 0 (false), `i` would be out of bounds as an index to `myArray`. In
+this case, the program never attempts to access `myArray[i]` since the truth of
+the expression is known to be false. Hence we need not worry here about trying
+to access an out-of-bounds array element if it is already known that i is
+greater than or equal to zero. A similar thing happens with expressions
+involving the or `||` operator.
+
+``` c
+while (doThis() || doThat()) ...
+```
+
+`doThat()` is never called if `doThis()` returns a non-zero (true) value.
+
+
+#### The If-Else statement
+
+If-Else provides a way to instruct the computer to execute a block of code only
+if certain conditions have been met. The syntax of an If-Else construct is:
+
+``` c
+if (/* condition goes here */) {
+  /* if the condition is non-zero (true), this code will execute */
+} else {
+  /* if the condition is 0 (false), this code will execute */
+}
+```
+
+The first block of code executes if the condition in parentheses directly after
+the if evaluates to non-zero (true); otherwise, the second block executes.
+
+The else and following block of code are completely optional. If there is no
+need to execute code if a condition is not true, leave it out.
+
+Also, keep in mind that an if can directly follow an else statement. While this
+can occasionally be useful, chaining more than two or three if-elses in this
+fashion is considered bad programming practice. We can get around this with the
+Switch-Case construct described later.
+
+Two other general syntax notes need to be made that you will also see in other
+control constructs: First, note that there is no semicolon after if or else.
+There could be, but the block (code enclosed in `{` and `}`) takes the place of
+that. Second, if you only intend to execute one statement as a result of an if
+or else, curly braces are not needed. However, many programmers believe that
+inserting curly braces anyway in this case is good coding practice.
+
+The following code sets `a` variable `c` equal to the greater of two variables
+`a` and `b`, or 0 if `a` and `b` are equal.
+
+``` c
+if (a > b) {
+  c = a;
+} else if (b > a) {
+  c = b;
+} else {
+  c = 0;
+}
+```
+
+Consider this question: why can't you just forget about else and write the code
+like:
+
+``` c
+ if (a > b) {
+   c = a;
+ }
+
+ if (a < b) {
+   c = b;
+ }
+
+ if (a == b) {
+   c = 0;
+ }
+```
+
+There are several answers to this. Most importantly, if your conditionals are
+not mutually exclusive, two cases could execute instead of only one. If the code
+was different and the value of `a` or `b` changes somehow (e.g.: you reset the
+lesser of `a` and `b` to 0 after the comparison) during one of the blocks? You
+could end up with multiple if statements being invoked, which is not your
+intent. Also, evaluating if conditionals takes processor time. If you use else
+to handle these situations, in the case above assuming (`a > b`) is non-zero
+(true), the program is spared the expense of evaluating additional if
+statements. The bottom line is that it is usually best to insert an else clause
+for all cases in which a conditional will not evaluate to non-zero (true).
+
+
+##### The conditional expression
+
+A conditional expression is a way to set values conditionally in a more
+shorthand fashion than If-Else. The syntax is:
+
+``` c
+(/* logical expression goes here */) ? (/* if non-zero (true) */) : (/* if 0 (false) */)
+```
+
+The logical expression is evaluated. If it is non-zero (true), the overall
+conditional expression evaluates to the expression placed between the `?` and `:`,
+otherwise, it evaluates to the expression after the `:`. Therefore, the above
+example (changing its function slightly such that `c` is set to `b` when `a` and
+`b` are equal) becomes:
+
+``` c
+c = (a > b) ? a : b;
+```
+
+Conditional expressions can sometimes clarify the intent of the code. Nesting
+the conditional operator should usually be avoided. It's best to use conditional
+expressions only when the expressions for a and b are simple. Also, contrary to
+a common beginner belief, conditional expressions do not make for faster code.
+As tempting as it is to assume that fewer lines of code result in faster
+execution times, there is no such correlation.
+
+
+#### The Switch-Case statement
+
+Say you write a program where the user inputs a number 1-5 (corresponding to
+student grades, A(represented as 1)-D(4) and F(5)), stores it in a variable
+__grade__ and the program responds by printing to the screen the associated
+letter grade. If you implemented this using If-Else, your code would look
+something like this:
+
+``` c
+if (grade == 1) {
+  printf("A\n");
+} else if (grade == 2) {
+  printf("B\n");
+} else if /* etc. etc. */
+```
+
+Having a long chain of if-else-if-else-if-else can be a pain, both for the
+programmer and anyone reading the code. Fortunately, there's a solution: the
+Switch-Case construct, of which the basic syntax is:
+
+``` c
+switch (/* integer or enum goes here */) {
+case /* potential value of the aforementioned int or enum */:
+  /* code */
+case /* a different potential value */:
+  /* different code */
+/* insert additional cases as needed */
+default:
+  /* more code */
+}
+```
+
+The Switch-Case construct takes a variable, usually an int or an `enum`, placed
+after switch, and compares it to the value following the case keyword. If the
+variable is equal to the value specified after `case`, the construct
+"activates", or begins executing the code after the case statement. Once the
+construct has "activated", there will be no further evaluation of cases.
+
+Switch-Case is syntactically "weird" in that no braces are required for code
+associated with a case.
+
+__Very important:__ Typically, the last statement for each `case` is a `break`
+statement. This causes program execution to jump to the statement following the
+closing bracket of the switch statement, which is what one would normally want
+to happen. However if the break statement is omitted, program execution
+continues with the first line of the next case, if any. This is called a
+fall-through. When a programmer desires this action, a comment should be placed
+at the end of the block of statements indicating the desire to fall through.
+Otherwise another programmer maintaining the code could consider the omission of
+the 'break' to be an error, and inadvertently 'correct' the problem. Here's an
+example:
+
+``` c
+ switch (someVariable) {
+ case 1:
+   printf("This code handles case 1\n");
+   break;
+ case 2:
+   printf("This prints when someVariable is 2, along with...\n");
+   /* FALL THROUGH */
+ case 3:
+   printf("This prints when someVariable is either 2 or 3.\n" );
+   break;
+ }
+```
+
+If a default case is specified, the associated statements are executed if none of the other cases match. A default case is optional. Here's a switch statement that corresponds to the sequence of if - else if statements above.
+
+Back to our example above. Here's what it would look like as Switch-Case:
+
+``` c
+switch (grade) {
+case 1:
+  printf("A\n");
+  break;
+case 2:
+  printf("B\n");
+  break;
+case 3:
+  printf("C\n");
+  break;
+case 4:
+  printf("D\n");
+  break;
+default:
+  printf("F\n");
+  break;
+}
+```
+
+A set of statements to execute can be grouped with more than one value of the variable as in the following example. (the fall-through comment is not necessary here because the intended behavior is obvious)
+
+``` c
+switch (something) {
+case 2:
+case 3:
+case 4:
+  /* some statements to execute for 2, 3 or 4 */
+  break;
+case 1:
+default:
+  /* some statements to execute for 1 or other than 2,3,and 4 */
+  break;
+}
+```
+
+Switch-Case constructs are particularly useful when used in conjunction with
+user defined enum data types. Some compilers are capable of warning about an
+unhandled `enum` value, which may be helpful for avoiding bugs.
+
+
+### Loops
+
+Often in computer programming, it is necessary to perform a certain action a
+certain number of times or until a certain condition is met. It is impractical
+and tedious to simply type a certain statement or group of statements a large
+number of times, not to mention that this approach is too inflexible and
+unintuitive to be counted on to stop when a certain event has happened. As a
+real-world analogy, someone asks a dishwasher at a restaurant what he did all
+night. He will respond, "I washed dishes all night long." He is not likely to
+respond, "I washed a dish, then washed a dish, then washed a dish, then...". The
+constructs that enable computers to perform certain repetitive tasks are called
+loops. 
