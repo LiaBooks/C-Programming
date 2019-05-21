@@ -3,7 +3,7 @@ author:   André Dietrich
 
 email:    andre.dietrich@ovgu.de
 
-version:  0.0.1
+version:  0.0.2
 
 language: en
 
@@ -12,7 +12,7 @@ narrator: US English Female
 comment:  Try to write a short comment about
           your course, multiline is also okay.
 
-import:   https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
+import:   https://raw.githubusercontent.com/liaTemplates/rextester/master/README.md
 
 @run:     @Rextester.C
 
@@ -3381,7 +3381,9 @@ example:
  }
 ```
 
-If a default case is specified, the associated statements are executed if none of the other cases match. A default case is optional. Here's a switch statement that corresponds to the sequence of if - else if statements above.
+If a default case is specified, the associated statements are executed if none
+of the other cases match. A default case is optional. Here's a switch statement
+that corresponds to the sequence of if - else if statements above.
 
 Back to our example above. Here's what it would look like as Switch-Case:
 
@@ -3405,7 +3407,9 @@ default:
 }
 ```
 
-A set of statements to execute can be grouped with more than one value of the variable as in the following example. (the fall-through comment is not necessary here because the intended behavior is obvious)
+A set of statements to execute can be grouped with more than one value of the
+variable as in the following example. (the fall-through comment is not necessary
+here because the intended behavior is obvious)
 
 ``` c
 switch (something) {
@@ -3422,7 +3426,7 @@ default:
 ```
 
 Switch-Case constructs are particularly useful when used in conjunction with
-user defined enum data types. Some compilers are capable of warning about an
+user defined `enum` data types. Some compilers are capable of warning about an
 unhandled `enum` value, which may be helpful for avoiding bugs.
 
 
@@ -3437,4 +3441,902 @@ real-world analogy, someone asks a dishwasher at a restaurant what he did all
 night. He will respond, "I washed dishes all night long." He is not likely to
 respond, "I washed a dish, then washed a dish, then washed a dish, then...". The
 constructs that enable computers to perform certain repetitive tasks are called
-loops. 
+loops.
+
+
+#### While loops
+
+A while loop is the most basic type of loop. It will run as long as the
+condition is non-zero (true). For example, if you try the following, the program
+will appear to lock up and you will have to manually close the program down. A
+situation where the conditions for exiting the loop will never become true is
+called an infinite loop.
+
+``` c
+int a = 1;
+while (42) {
+  a = a * 2;
+}
+```
+
+Here is another example of a while loop. It prints out all the powers of two
+less than 100.
+
+``` c
+int a = 1;
+while (a < 100) {
+  printf("a is %d \n", a);
+  a = a * 2;
+}
+```
+
+The flow of all loops can also be controlled by `break` and `continue` statements. A
+`break` statement will immediately exit the enclosing loop. A `continue` statement
+will skip the remainder of the block and start at the controlling conditional
+statement again. For example:
+
+``` c
+int a = 1;
+while (42) { // loops until the break statement in the loop is executed
+  printf("a is %d ", a);
+  a = a * 2;
+  if (a > 100) {
+    break;
+  } else if (a == 64) {
+    continue;  // Immediately restarts at while, skips next step
+  }
+  printf("a is not 64\n");
+}
+```
+
+In this example, the computer prints the value of a as usual, and prints a
+notice that a is not 64 (unless it was skipped by the continue statement).
+
+Similar to If above, braces for the block of code associated with a While loop
+can be omitted if the code consists of only one statement, for example:
+
+``` c
+int a = 1;
+while (a < 100)
+  a = a * 2;
+```
+
+This will merely increase a until a is not less than 100.
+
+When the computer reaches the end of the while loop, it always goes back to the
+while statement at the top of the loop, where it re-evaluates the controlling
+condition. If that condition is "true" at that instant -- even if it was
+temporarily 0 for a few statements inside the loop -- then the computer begins
+executing the statements inside the loop again; otherwise the computer exits the
+loop. The computer does not "continuously check" the controlling condition of a
+while loop during the execution of that loop. It only "peeks" at the controlling
+condition each time it reaches the while at the top of the loop.
+
+It is very important to note, once the controlling condition of a While loop
+becomes 0 (false), the loop will not terminate until the block of code is
+finished and it is time to reevaluate the conditional. If you need to terminate
+a While loop immediately upon reaching a certain condition, consider using
+break.
+
+A common idiom is to write:
+
+``` c
+int i = 5;
+while (i--) {
+  printf("java and c# can't do this\n");
+}
+```
+
+This executes the code in the while loop 5 times, with i having values that
+range from 4 down to 0 (inside the loop). Conveniently, these are the values
+
+needed to access every item of an array containing 5 elements.
+
+
+#### For loops
+
+For loops generally look something like this:
+
+``` c
+for (initialization; test; increment) {
+  /* code */
+}
+```
+
+The _initialization_ statement is executed exactly once - before the first
+evaluation of the test condition. Typically, it is used to assign an initial
+value to some variable, although this is not strictly necessary. The
+_initialization_ statement can also be used to declare and initialize variables
+used in the loop.
+
+The test expression is evaluated each time before the code in the `for` loop
+executes. If this expression evaluates as 0 (false) when it is checked (i.e. if
+the expression is not true), the loop is not (re)entered and execution continues
+normally at the code immediately following the FOR-loop. If the expression is
+non-zero (true), the code within the braces of the loop is executed.
+
+After each iteration of the loop, the increment statement is executed. This
+often is used to increment the loop index for the loop, the variable initialized
+in the initialization expression and tested in the test expression. Following
+this statement execution, control returns to the top of the loop, where the test
+action occurs. If a `continue` statement is executed within the for loop, the
+increment statement would be the next one executed.
+
+Each of these parts of the for statement is optional and may be omitted. Because
+of the free-form nature of the for statement, some fairly fancy things can be
+done with it. Often a for loop is used to loop through items in an array,
+processing each item at a time.
+
+``` c
+int myArray[12];
+int ix;
+for (ix = 0; ix < 12; ix++) {
+  myArray[ix] = 5 * ix + 3;
+}
+```
+
+The above for loop initializes each of the 12 elements of `myArray`. The loop
+index can start from any value. In the following case it starts from 1.
+
+``` c
+for (ix = 1; ix <= 10; ix++) {
+  printf("%d ", ix);
+}
+```
+
+which will print
+
+``` bash
+1 2 3 4 5 6 7 8 9 10
+```
+
+You will most often use loop indexes that start from 0, since arrays are indexed
+at zero, but you will sometimes use other values to initialize a loop index as
+well.
+
+The increment action can do other things, such as decrement. So this kind of
+loop is common:
+
+``` c
+for (i = 5; i > 0; i--) {
+  printf("%d ", i);
+}
+```
+
+which yields
+
+``` bash
+5 4 3 2 1
+```
+
+Here's an example where the test condition is simply a variable. If the variable
+has a value of 0 or NULL, the loop exits, otherwise the statements in the body
+of the loop are executed.
+
+``` c
+for (t = list_head; t; t = NextItem(t)) {
+  /* body of loop */
+}
+```
+
+A WHILE loop can be used to do the same thing as a FOR loop, however a FOR loop
+is a more condensed way to perform a set number of repetitions since all of the
+necessary information is in a one line statement.
+
+A FOR loop can also be given no conditions, for example:
+
+``` c
+for (;;) {
+  /* block of statements */
+}
+```
+
+This is called an infinite loop since it will loop forever unless there is a
+break statement within the statements of the for loop. The empty test condition
+effectively evaluates as true.
+
+It is also common to use the comma operator in for loops to execute multiple
+statements.
+
+``` c
+int i, j, n = 10;
+for (i = 0, j = 0; i <= n; i++, j += 2) {
+  printf("i = %d , j = %d \n", i, j);
+}
+```
+
+Special care should be taken when designing or refactoring the conditional part,
+especially whether using `<` or `<=` , whether start and stop should be
+corrected by 1, and in case of prefix- and postfix-notations. ( On a 100 yards
+promenade with a tree every 10 yards there are 11 trees. )
+
+``` c
+int i, n = 10;
+for (i = 0; i < n; i++)
+  printf("%d ", i); // processed n times => 0 1 2 3 ... (n-1)
+printf("\n");
+for (i = 0; i <= n; i++)
+  printf("%d ", i); // processed (n+1) times => 0 1 2 3 ... n
+printf("\n");
+for (i = n; i--;)
+  printf("%d ", i); // processed n times => (n-1) ...3 2 1 0
+printf("\n");
+for (i = n; --i;)
+  printf("%d ", i); // processed (n-1) times => (n-1) ...4 3 2 1
+
+printf("\n");
+```
+
+#### Do-While loops
+
+A DO-WHILE loop is a post-check while loop, which means that it checks the
+condition after each run. As a result, even if the condition is zero (false), it
+will run at least once. It follows the form of:
+
+``` c
+do {
+  /* do stuff */
+} while (condition);
+```
+
+Note the terminating semicolon. This is required for correct syntax. Since this
+is also a type of while loop, `break` and `continue` statements within the loop
+function accordingly. A `continue` statement causes a jump to the test of the
+condition and a `break` statement exits the loop.
+
+It is worth noting that Do-While and While are functionally almost identical,
+with one important difference: Do-While loops are always guaranteed to execute
+at least once, but While loops will not execute at all if their condition is 0
+(false) on the first evaluation.
+
+
+#### One last thing: `goto`
+
+`goto` is a very simple and traditional control mechanism. It is a statement
+used to immediately and unconditionally jump to another line of code. To use
+`goto`, you must place a label at a point in your program. A label consists of a
+name followed by a colon (`:`) on a line by itself. Then, you can type
+`goto label;` at the desired point in your program. The code will then continue
+executing beginning with label. This looks like:
+
+``` c
+MyLabel:
+  /* some code */
+  goto MyLabel;
+```
+
+The ability to transfer the flow of control enabled by gotos is so powerful
+that, in addition to the simple if, all other control constructs can be written
+using gotos instead. Here, we can let "S" and "T" be any arbitrary statements:
+
+``` c
+if (''cond'') {
+  S;
+} else {
+  T;
+}
+/* ... */
+```
+
+The same statement could be accomplished using two gotos and two labels:
+
+``` c
+if (''cond'') goto Label1;
+  T;
+  goto Label2;
+Label1:
+  S;
+Label2:
+  /* ... */
+```
+
+Here, the first `goto` is conditional on the value of "cond". The second `goto`
+is unconditional. We can perform the same translation on a loop:
+
+``` c
+while (''cond1'') {
+  S;
+  if (''cond2'')
+    break;
+  T;
+}
+/* ... */
+```
+
+Which can be written as:
+
+``` c
+Start:
+  if (!''cond1'') goto End;
+  S;
+  if (''cond2'') goto End;
+  T;
+  goto Start;
+End:
+  /* ... */
+```
+
+As these cases demonstrate, often the structure of what your program is doing
+can usually be expressed without using gotos. Undisciplined use of gotos can
+create unreadable, unmaintainable code when more idiomatic alternatives (such as
+if-elses, or for loops) can better express your structure. Theoretically, the
+goto construct does not ever have to be used, but there are cases when it can
+increase readability, avoid code duplication, or make control variables
+unnecessary. You should consider first mastering the idiomatic solutions, and
+use `goto` only when necessary. Keep in mind that many, if not most, C style
+guidelines strictly forbid use of `goto`, with the only common exceptions being
+the following examples.
+
+One use of `goto` is to break out of a deeply nested loop. Since break will not
+work (it can only escape one loop), `goto` can be used to jump completely
+outside the loop. Breaking outside of deeply nested loops without the use of the
+`goto` is always possible, but often involves the creation and testing of extra
+variables that may make the resulting code far less readable than it would be
+with `goto`. The use of `goto` makes it easy to undo actions in an orderly
+fashion, typically to avoid failing to free memory that had been allocated.
+
+Another accepted use is the creation of a state machine. This is a fairly
+advanced topic though, and not commonly needed.
+
+
+### Examples
+
+``` c
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+  int years;
+
+  printf("Enter your age in years : ");
+  fflush(stdout);
+  errno = 0;
+  if (scanf("%d", &years) != 1 || errno)
+    return EXIT_FAILURE;
+  printf("Your age in days is %d\n", years * 365);
+  return 0;
+}
+```
+@run
+
+
+## Procedures and functions
+
+In C programming, all executable code resides within a function. A function is a
+named block of code that performs a task and then returns control to a caller.
+Note that other programming languages may distinguish between a "function",
+"subroutine", "subprogram", "procedure", or "method" -- in C, these are all
+functions.
+
+A function is often executed (called) several times, from several different
+places, during a single execution of the program. After finishing a subroutine,
+the program will branch back (return) to the point after the call.
+
+Functions are a powerful programming tool.
+
+As a basic example, suppose you are writing a program that calculates the
+distance of a given (x,y) point to the x-axis and to the y-axis. You will need
+to compute the absolute value of the whole numbers x and y. We could write it
+like this (assuming we don't have a predefined function for absolute value in
+any library):
+
+``` c
+#include <stdio.h>
+
+/*this is the function to compute the absolute value of a whole number.*/
+int abs(int x)
+{
+  if (x>=0) return x;
+  else return -x;
+}
+
+/*this is the program that uses twice the function defined above.*/
+int main()
+{
+  int x, y;
+
+  printf("Type the coordinates of a point in 2-plane, say P = (x,y). First x=");
+  scanf("%d", &x);
+  printf("Second y=");
+  scanf("%d", &y);
+
+  printf("The distance of the P point to the x-axis is %d. \n Its distance to the y-axis is %d. \n", abs(y), abs(x));
+
+  return 0;
+}
+```
+@run
+
+The following example illustrate the usage of a function as a procedure.
+Consider you are making a program that tells students if they are approved in
+the discipline or not. We can create a function and call it as many times as we
+need instead of repeating the same code.
+
+``` c
+#include<stdio.h>
+
+/*here is where the 'check' function is being defined.*/
+void check(int x)
+{
+  if (x<60)
+    printf("Sorry! You will need to try this course again.\n");
+  else
+    printf("Enjoy your vacations! You are approved.\n");
+}
+
+/*here the program actually starts, and use the check function three times.*/
+int main()
+{
+  int a, b, c;
+
+  printf("Type your grade in Mathematics (whole number). \n");
+  scanf("%d", &a);
+  check(a);
+
+  printf("Type your grade in Science (whole number). \n");
+  scanf("%d", &b);
+  check(b);
+
+  printf("Type your grade in Programming (whole number). \n");
+  scanf("%d", &c);
+  check(c);
+
+  /* this program should be replaced by something more meaningful.*/
+  return 0;
+}
+```
+
+Notice that in the program above, there is no outcome value for the 'check'
+function. It only executes a procedure.
+
+This is precisely what functions are for.
+
+
+### More on functions
+
+A function is like a black box. It takes in input, does something with it, then
+spits out an answer.
+
+Note that a function may not take any inputs at all, or it may not return
+anything at all. In the above example, if we were to make a function of that
+loop, we may not need any inputs, and we aren't returning anything at all (Text
+output doesn't count - when we speak of returning we mean to say meaningful data
+that the program can use).
+
+We have some terminology to refer to functions:
+
+* A function, call it f, that uses another function g, is said to call g. For
+  example, f calls g to print the squares of ten numbers.
+* A function's inputs are known as its arguments
+* A function g that gives some kind of answer back to f is said to return that
+  answer. For example, g returns the sum of its arguments.
+
+
+#### Writing functions in C
+
+It's always good to learn by example. Let's write a function that will return
+the square of a number.
+
+``` c
+int square(int x)
+{
+  int square_of_x;
+  square_of_x = x * x;
+  return square_of_x;
+}
+```
+
+To understand how to write such a function like this, it may help to look at
+what this function does as a whole. It takes in an int, x, and squares it,
+storing it in the variable `square_of_x`. Now this value is returned.
+
+The first int at the beginning of the function declaration is the type of data
+that the function returns. In this case when we square an integer we get an
+integer, and we are returning this integer, and so we write int as the return
+type.
+
+Next is the name of the function. It is good practice to use meaningful and
+descriptive names for functions you may write. It may help to name the function
+after what it is written to do. In this case we name the function "square",
+because that's what it does - it squares a number.
+
+Next is the function's first and only argument, an int, which will be referred
+to in the function as x. This is the function's input.
+
+In between the braces is the actual guts of the function. It declares an integer
+variable called square_of_x that will be used to hold the value of the square of
+x. Note that the variable square_of_x can only be used within this function, and
+not outside. We'll learn more about this sort of thing later, and we will see
+that this property is very useful.
+
+We then assign `x` multiplied by `x`, or `x` squared, to the variable
+`square_of_x`, which is what this function is all about. Following this is a
+return statement. We want to return the value of the square of x, so we must say
+that this function returns the contents of the variable `square_of_x`.
+
+Our brace to close, and we have finished the declaration.
+
+Written in a more concise manner, this code performs exactly the same function
+as the above:
+
+``` c
+int square(int x)
+{
+  return x * x;
+}
+```
+
+Note this should look familiar - you have been writing functions already, in
+fact - main is a function that is always written.
+
+
+##### In general
+
+In general, if we want to declare a function, we write
+
+``` c
+type name(type1 arg1, type2 arg2, ...)
+{
+ // code ...
+}
+```
+
+We've previously said that a function can take no arguments, or can return
+nothing, or both. What do we write if we want the function to return nothing? We
+use C's void keyword. void basically means "nothing" - so if we want to write a
+function that returns nothing, for example, we write
+
+``` c
+void sayhello(int number_of_times)
+{
+  int i;
+  for(i=1; i <= number_of_times; i++) {
+     printf("Hello!\n");
+  }
+}
+```
+
+Notice that there is no return statement in the function above. Since there's
+none, we write void as the return type. (Actually, one can use the return
+keyword in a procedure to return to the caller before the end of the procedure,
+but one cannot return a value as if it were a function.)
+
+What about a function that takes no arguments? If we want to do this, we can
+write for example
+
+``` c
+float calculate_number(void)
+{
+  float to_return=1;
+  int i;
+  for(i=0; i < 100; i++) {
+     to_return += 1;
+     to_return = 1/to_return;
+  }
+  return to_return;
+}
+```
+
+Notice this function doesn't take any inputs, but merely returns a number
+calculated by this function.
+
+Naturally, you can combine both void return and void in arguments together to
+get a valid function, also.
+
+
+##### Recursion
+
+Here's a simple function that does an infinite loop. It prints a line and calls
+itself, which again prints a line and calls itself again, and this continues
+until the stack overflows and the program crashes. A function calling itself is
+called recursion, and normally you will have a conditional that would stop the
+recursion after a small, finite number of steps.
+
+``` c
+      // don't run this!
+void infinite_recursion()
+{
+    printf("Infinite loop!\n");
+    infinite_recursion();
+}
+```
+
+A simple check can be done like this. Note that `++depth` is used so the
+increment will take place before the value is passed into the function.
+Alternatively you can increment on a separate line before the recursion call. If
+you say `print_me(3,0)`; the function will print the line Recursion 3 times.
+
+``` c
+void print_me(int j, int depth)
+{
+  if(depth < j) {
+    printf("Recursion! depth = %d j = %d\n",depth,j); //j keeps its value
+    print_me(j, ++depth);
+  }
+}
+```
+
+Recursion is most often used for jobs such as directory tree scans, seeking for
+the end of a linked list, parsing a tree structure in a database and factorising
+numbers (and finding primes) among other things.
+
+
+##### Static functions
+
+If a function is to be called only from within the file in which it is declared,
+it is appropriate to declare it as a static function. When a function is
+declared static, the compiler will know to compile an object file in a way that
+prevents the function from being called from code in other files.
+
+Example:
+
+``` c
+static int compare( int a, int b )
+{
+    return (a+4 < b)? a : b;
+}
+```
+
+
+### Using C functions
+
+We can now write functions, but how do we use them? When we write main, we place
+the function outside the braces that encompass main.
+
+When we want to use that function, say, using our calculate_number function
+above, we can write something like
+
+``` c
+float f;
+f = calculate_number();
+```
+
+If a function takes in arguments, we can write something like
+
+``` c
+int square_of_10;
+square_of_10 = square(10);
+```
+
+If a function doesn't return anything, we can just say
+
+``` c
+say_hello();
+```
+
+since we don't need a variable to catch its return value.
+
+
+### Functions from the C Standard Library
+
+While the C language doesn't itself contain functions, it is usually linked with
+the C Standard Library. To use this library, you need to add an `#include`
+directive at the top of the C file, which may be one of the following from
+C89/C90 (the functions available are):
+
+[__`<assert.h>`__](https://en.wikipedia.org/wiki/Assert.h)
+* `assert(int)`
+
+[__`<ctype.h>`__](https://en.wikipedia.org/wiki/Ctype.h)
+* `isalnum`, `isalpha`, `isblank`
+* `iscntrl`, `isdigit`, `isgraph`
+* `islower`, `isprint`, `ispunct`
+* `isspace`, `isupper`, `isxdigit`
+* `tolower`, `toupper`
+
+[__`<errno.h>`__](https://en.wikipedia.org/wiki/Errno.h)
+* (errno)
+
+[__`<float.h>`__](https://en.wikipedia.org/wiki/Float.h)
+* (constants)
+
+[__`<limits.h>`__](https://en.wikipedia.org/wiki/Limits.h)
+* (constants only)
+
+[__`<locale.h>`__](https://en.wikipedia.org/wiki/Locale.h)
+* `struct lconv* localeconv(void);`
+* `char* setlocale(int, const char*);`
+
+[__`<math.h>`__](https://en.wikipedia.org/wiki/Math.h)
+* `sin`, `cos`, `tan`
+* `asin`, `acos`, `atan`, `atan2`
+* `sinh`, `cosh`, `tanh`
+* `ceil`
+* `exp`
+* `fabs`
+* `floor`
+* `fmod`
+* `frexp`
+* `ldexp`
+* `log`, `log10`
+* `modf`
+* `pow`
+* `sqrt`
+
+[__`<setjmp.h>`__](https://en.wikipedia.org/wiki/Setjmp.h)
+* `int setjmp(jmp_buf env)`
+* `void longjmp(jmp_buf env, int value)`
+
+[__`<signal.h>`__](https://en.wikipedia.org/wiki/Signal.h)
+* `int raise(int sig).`
+* `void* signal(int sig, void (*func)(int))`
+
+[__`<stdarg.h>`__](https://en.wikipedia.org/wiki/Stdarg.h)
+* `va_start (va_list, ap)`
+* `va_arg (ap, (type))`
+* `va_end (ap)`
+* `va_copy (va_list, va_list)`
+
+[__`<stddef.h>`__](https://en.wikipedia.org/wiki/Stddef.h)
+* offsetof macro
+
+[__`<stdio.h>`__](https://en.wikipedia.org/wiki/Stdio.h)
+* `fread`, `fwrite`
+* `getc`, `putc`
+* `getchar`, `putchar`, `fputchar`
+* `gets`, `puts`
+* `printf`, `vprintf`
+* `fprintf`, `vfprintf`
+* `sprintf`, `snprintf`, `vsprintf`, `vsnprintf`
+* `perror`
+* `scanf`, `vscanf`
+* `fscanf`, `vfscanf`
+* `sscanf`, `vsscanf`
+* `setbuf`, `setvbuf`
+* `tmpnam`
+* `ungetc`
+* [`printf`](https://en.wikibooks.org/wiki/C_Programming/Procedures_and_functions/printf)
+* [full list](http://www.utas.edu.au/infosys/info/documentation/C/CStdLib.html#ctype.h)
+
+[__`<stdlib.h>`__](https://en.wikipedia.org/wiki/Stdlib.h)
+* `atof(char*)`, `atoi(char*)`, `atol(char*)`
+* `strtod(char * str, char ** endptr )`, `strtol(char *str, char **endptr)`,
+  `strtoul(char *str, char **endptr)`
+* `rand()`, `srand()`
+* `malloc(size_t)`, `calloc (size_t elements, size_t elementSize)`,
+  `realloc(void*, int)`
+* `free (void*)`
+* `exit(int)`, `abort()`
+* `atexit(void (*func)())`
+* `getenv`
+* `system`
+* `qsort(void *, size_t number, size_t size, int (*sortfunc)(void*, void*))`
+* `abs`, `labs`
+* `div`, `ldiv`
+
+[__`<string.h>`__](https://en.wikipedia.org/wiki/String.h)
+* `memcpy`, `memmove`
+* `memchr`, `memcmp`, `memset`
+* `strcat`, `strncat`, `strchr`, `strrchr`
+* `strcmp`, `strncmp`, `strccoll`
+* `strcpy`, `strncpy`
+* `strerror`
+* `strlen`
+* `strspn`, `strcspn`
+* `strpbrk`
+* `strstr`
+* `strtok`
+* `strxfrm`
+
+[__`<time.h>`__](https://en.wikipedia.org/wiki/Time.h)
+* `asctime (struct tm* tmptr)`
+* `clock_t clock()`
+* `char* ctime(const time_t* timer)`
+* `double difftime(time_t timer2, time_t timer1)`
+* `struct tm* gmtime(const time_t* timer)`
+* `struct tm* gmtime_r(const time_t* timer, struct tm* result)`
+* `struct tm* localtime(const time_t* timer)`
+* `time_t mktime(struct tm* ptm)`
+* `time_t time(time_t* timer)`
+* `char * strptime(const char* buf, const char* format, struct tm* tptr)`
+* `time_t timegm(struct tm *brokentime)`
+
+
+### Variable-length argument lists
+
+Functions with variable-length argument lists are functions that can
+take a varying number of arguments. An example in the C standard library
+is the `printf` function, which can take any number of arguments
+depending on how the programmer wants to use it.
+
+C programmers rarely find the need to write new functions with
+variable-length arguments. If they want to pass a bunch of things to a
+function, they typically define a structure to hold all those things --
+perhaps a linked list, or an array -- and call that function with the
+data in the arguments.
+
+However, you may occasionally find the need to write a new function that
+supports a variable-length argument list. To create a function that can
+accept a variable-length argument list, you must first include the
+standard library header `stdarg.h`. Next, declare the function as you
+would normally. Next, add as the last argument an ellipsis ("..."). This
+indicates to the compiler that a variable list of arguments is to
+follow. For example, the following function declaration is for a
+function that returns the average of a list of numbers:
+
+``` c
+  float average (int n_args, ...);
+```
+
+Note that because of the way variable-length arguments work, we must
+somehow, in the arguments, specify the number of elements in the
+variable-length part of the arguments. In the `average` function here,
+it's done through an argument called `n_args.` In the `printf` function,
+it's done with the format codes that you specify in that first string in
+the arguments you provide.
+
+Now that the function has been declared as using variable-length
+arguments, we must next write the code that does the actual work in the
+function. To access the numbers stored in the variable-length argument
+list for our `average` function, we must first declare a variable for
+the list itself:
+
+``` c
+  va_list myList;
+```
+
+The `va_list` type is a type declared in the `stdarg.h` header that
+basically allows you to keep track of your list. To start actually using
+`myList`, however, we must first assign it a value. After all, simply
+declaring it by itself wouldn't do anything. To do this, we must call
+`va_start`, which is actually a macro defined in `stdarg.h.` In the
+arguments to `va_start`, you must provide the `va_list` variable you
+plan on using, as well as the name of the last variable appearing before
+the ellipsis in your function declaration:
+
+``` c
+#include <stdarg.h>
+float average (int n_args, ...)
+{
+    va_list myList;
+    va_start (myList, n_args);
+    va_end (myList);
+}
+```
+
+Now that `myList` has been prepped for usage, we can finally start accessing the
+variables stored in it. To do so, use the `va_arg` macro, which pops off the
+next argument on the list. In the arguments to `va_arg`, provide the `va_list`
+variable you're using, as well as the primitive data type (e.g. `int`, `char`)
+that the variable you're accessing should be:
+
+``` c
+#include <stdarg.h>
+float average (int n_args, ...)
+{
+    va_list myList;
+    va_start (myList, n_args);
+
+    int myNumber = va_arg (myList, int);
+    va_end (myList);
+}
+```
+
+By popping `n_args` integers off of the variable-length argument list, we can
+manage to find the average of the numbers:
+
+``` c
+#include <stdarg.h>
+float average (int n_args, ...)
+{
+    va_list myList;
+    va_start (myList, n_args);
+
+    int numbersAdded = 0;
+    int sum = 0;
+
+    while (numbersAdded < n_args) {
+        int number = va_arg (myList, int); // Get next number from list
+        sum += number;
+        numbersAdded += 1;
+    }
+    va_end (myList);
+
+    float avg = (float)(sum) / (float)(numbersAdded); // Find the average
+    return avg;
+}
+```
+
+By calling `average(2, 10, 20)`, we get the average of 10 and 20, which is 15.
