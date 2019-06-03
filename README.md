@@ -4695,3 +4695,461 @@ The following libraries are recognized by POSIX:
      a. What would the correct statement look like?
 
      b. Would the reverse be a valid or invalid C statement?
+
+### Simple I/O
+
+#### String manipulation
+
+1. Write a program that prompts the user for a string, and prints its reverse.
+2. Write a program that prompts the user for a sentence, and prints each word on
+   its own line.
+
+#### Loops
+
+1. Write a function that outputs a right isosceles triangle of height and width
+   `n`, so `n = 3` would look like
+
+   ``` bash
+   *
+   **
+   ***
+   ```
+
+2. Write a function that outputs a sideways triangle of height 2n-1 and width
+   `n`, so the output for n = 4 would be:
+
+   ``` bash
+   *
+   **
+   ***
+   ****
+   ***
+   **
+   *
+   ```
+
+3. Write a function that outputs a right-side-up triangle of height `n` and
+   width `2n-1`; the output for `n = 6` would be:
+
+   ``` bash
+        *
+       ***
+      *****
+     *******
+    *********
+   ***********
+   ```
+
+
+### Program Flow
+
+1. Build a program where control passes from main to four different functions
+   with 4 calls.
+2. Now make a while loop in main with the function calls inside it. Ask for
+   input at the beginning of the loop. End the while loop if the user hits Q
+3. Next add conditionals to call the functions when the user enters numbers, so
+   1 goes to function1, 2 goes to function 2, etc.
+4. Have function 1 call function `a`, which calls function `b`, which calls
+   function `c`
+5. Draw out a diagram of program flow, with arrows to indicate where control
+   goes
+
+
+### Functions
+
+1. Write a function to check if an integer is negative; the declaration should
+   look like `bool is_positive(int i);`
+2. Write a function to raise a floating point number to an integer power, so for
+   example to when you use it
+
+   ``` c
+   float a = raise_to_power(2, 3);    //a gets 8
+   float b = raise_to_power(9, 2);    //b gets 81
+   float raise_to_power(float f, int power);    //make this your declaration
+   ```
+
+
+### Math
+
+1. Write a function to calculate if a number is prime. Return 1 if it is prime
+   and 0 if it is not a prime.
+2. Write a function to determine the number of prime numbers below n.
+3. Write a function to find the square root by using
+   [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method).
+4. Write functions to evaluate the trigonometric functions.
+5. Try to write a random number generator.
+6. Write a function to determine the prime `number(s)` between 2 and 100.
+
+
+### Recursion
+
+#### Merge sort
+
+Write a C program to generate a random integer array with a given length n, and
+sort it recursively using the Merge sort algorithm.
+
+The merge sort algorithm is a recursive algorithm .
+
+* sorting a one element array is easy.
+* sorting two one-element arrays, requires the merge operation. The merge
+  operation looks at two sorted arrays as lists, and compares the head of the
+  list , and which ever head is smaller, this element is put on the sorted list
+  and the head of that list is ticked off, so the next element becomes the head
+  of that list. This is done until one of the lists is exhausted, and the other
+  list is then copied onto the end of the sorted list.
+* the recursion occurs, because merging two one-element arrays produces one
+  two-element sorted array, which can be merged with another two-element sorted
+  array produced the same way. This produces a sorted 4 element array, and the
+  same applies for another 4 element sorted array.
+* so the basic merge sort, is to check the size of list to be sorted, and if it
+  is greater than one, divide the array into two, and call merge sort again on
+  the two halves. After wards, merge the two halves in a temporary space of
+  equal size, and then copy back the final sorted array onto the original array.
+
+
+#### Binary heaps
+
+A binary max-heap or min-heap, is an ordered structure where some nodes are
+guaranteed greater than other nodes, e.g. the parent vs two children. A binary
+heap can be stored in an array, where,
+
+* given a position `i` (the parent), `i*2` is the left child, and `i*2+1` is the
+  right child.
+* (C arrays begin at position `0`, but `0 * 2 = 0`, and `0 *2 + 1= 1`, which is
+  incorrect, so start the heap at position 1, or add 1 for parent-to-child
+  calculations, and subtract 1 for child-to-parent calculations).
+
+  * try to model this using with a pencil and paper, using 10 random unsorted
+    numbers, and inserting each of them into a "heapsort" array of 10 elements.
+  * To insert into a heap, end-add and swap-parent if higher, until parent
+    higher.
+  * To delete the top of a heap, move end-to-top, and defer-higher-child or
+    sift-down , until no child is higher.
+  * try it on a pen and paper the numbers 10, 4, 6 ,3 ,5 , 11.
+  * the answer was 11, 5, 10, 3, 4 , 6.
+  * EXERCISE: Now try removing each top element of 11, 5, 10, 3, 4, 6 , using
+    end-to-top and sift-down ( or swap-higher-child) to get the numbers in
+    descending order.
+  * a priority queue allows elements to be inserted with a priority , and
+    extracted according to priority. ( This can happen usefully, if the element
+    has a paired structure, one part is the key, and the other part the data.
+    Otherwise, it is just a mechanism for sorting ).
+  * EXERCISE: Using the above technique of insert-back/challenge-parent, and
+    delete-front/last-to-front/defer-higher-child, implement either heap sort or
+    a priority queue.
+
+
+#### Dijkstra's algorithm
+
+Dijkstra's algorithm is a searching algorithm using a priority queue. It begins
+with inserting the start node with a priority value of 0. All other nodes are
+inserted with priority values of large N. Each node has an adjacency list of
+other nodes, a current distance to start node, and previous pointer to previous
+node used to calculate current node. Alternative to an adjacency list, is an
+adjacency matrix, which needs n x n boolean adjacencies.
+
+The algorithm basically iterates over the priority queue, removing the front
+node, examining the adjacent nodes, and updating with a distance equal to the
+sum of the front nodes distance for each adjacent node , and the distance given
+by the adjacency information for an adjacent node.
+
+After each node's update, the extra operation __"update priority"__ is used on
+that node :
+
+while the node's distance is less than it's parents node ( for this priority
+queue, parents have lesser distances than the children), the node is swapped
+with the parent.
+
+After this, while the node is greater distance than one or more of its children,
+it is swapped with the least distant child, so the least distant child becomes
+parent of its greater distant sibling, and parent to the greater distant current
+node.
+
+With updating the priority, the adjacent node to the current node has a back
+pointer changed to the current node.
+
+The algorithm ends when the target node becomes the current node removed, and
+the path to the start node can be recorded in an array by following back
+pointers, and then doing something like a quick sort partition to reverse the
+order of the array, to give the shortest path to target node from the start
+node.
+
+
+#### Quick sort
+
+Write a C program to recursively sort using the Quick sort partition exchange
+algorithm.
+
+you can use the "driver", or the random number test data from Q1. on mergesort.
+This is "re-use", which is encouraged in general.
+
+* an advantage of reuse is less writing time, debugging time, testing time.
+
+the concept of partition exchange is that a partition element is (randomly)
+selected, and every thing that needs sorted is put into 3 equivalance
+
+classes : those elements less than the partition value, the partition element,
+and everything above (and equal to ) the partition element.
+
+* this can be done without allocating more space than one temporary element
+  space for swapping two elements. e.g a temporary integer for integer data.
+* However, where the partition element should be using the original array space
+  is not known.
+* This is usually implemented with putting the partition on the end of the array
+  to be sorted, and then putting two pointers , one at the start of the array,
+
+and one at the element next to the partition element , and repeatedly scanning
+the left pointer right, and the right pointer left.
+
+* the left scan stops when an element equal to or greater than the partition is
+  found, and the right scan stops for a smaller element than the partition
+  value,
+
+and these are swapped, which uses the temporary extra space.
+
+* the left scan will always stop if it reaches the partition element , which is
+  the last element; this means the entire array is less than partition value.
+* the right scan could reach the first element, if the entire array is greater
+  than the partition , and this needs to be tested for, else the scan doesn't
+  stop.
+* the outer loop exits when then left and right pointers cross. Testing for
+  pointer crossing and outer loop exit
+
+should occur before swapping, otherwise the right pointer may be swapping a
+less-than-partition element previously scanned by the left pointer.
+
+* finally, the partition element needs to be put between the left and right
+  partitions, once the pointers cross.
+
+* At pointer crossing, the left pointer may be stopped at the partition
+  element's last position in the array, and the right pointer not progressed
+  past the
+
+element just before the last element. This happens when all the elements are
+less than the partition.
+
+* if the right pointer is chosen to swap with the partition, then an incorrect
+  state results where the last element of the left array becomes less than the
+  partition element value.
+
+* if the left pointer is chosen to swap with the partition, then the left array
+  will be less than the partition, and partition will have swapped with an
+  element with value greater than the partition or the partition itself.
+
+The corner case of quicksorting a 2 element out-of-order array has to be
+examined.
+
+* The left pointer stops on the first out of order element. The right pointer
+  begins on the first out-of-order element, but the outer loop exits because
+  this is the leftmost element. The partition element is then swapped with the
+  left pointer's first element, and the two elements are now in order.
+* In the case of a 2 element in order array, the leftmost pointer skips the
+  first element which is less than the partition, and stops on the partition.
+  The right pointer begins on the first element and exits because it is the
+  first position. The pointers have crossed so the outer loop exits. The
+  partition swaps with itself, so the in-ordering is preserved.
+
+After doing a swap, the left pointer should be incremented and right pointer
+decremented, so the same positions aren't scanned again, because an endless loop
+can result ( possibly when the left pointer exits when the element is equal to
+or greater than the partition, and the right element is equal to the partition
+value). One implementation, Sedgewick, starts the pointers with the left pointer
+minus one and right pointer
+
+the plus one the intended initial scan positions, and use the pre-increment and
+pre-decrement operators e.g. ( ++i, --i) .
+
+
+## Advanced data types
+
+In the chapter
+[Variables](https://en.wikibooks.org/wiki/C_Programming/Variables) we looked at
+the primitive data types. However advanced data types allow us greater
+flexibility in managing data in our program.
+
+
+### Structs
+
+Structs are data types made of variables of other data types (possibly including
+other structs). They are used to group pieces of information into meaningful
+units, and also permit some constructs not possible otherwise. The variables
+declared in a struct are called "members". One defines a struct using the
+`struct` keyword. For example:
+
+``` c
+struct mystruct {
+    int int_member;
+    double double_member;
+    char string_member[25];
+} struct_var;
+```
+
+`struct_var` is a variable of type `struct mystruct`, which we declared along
+with the definition of the new `struct mystruct` data type. More commonly,
+struct variables are declared after the definition of the struct, using the
+form:
+
+``` c
+struct mystruct struct_var;
+```
+
+It is often common practice to make a _type synonym_ so we don't have to type
+"struct mystruct" all the time. C allows us the possibility to do so using a
+`typedef` statement, which aliases a type:
+
+``` c
+typedef struct {
+    // ...
+} Mystruct;
+```
+
+The `struct` itself is an _incomplete_ type (by the absence of a name on the
+first line), but it is aliased as `Mystruct`. Then the following may be used:
+
+``` c
+Mystruct struct_var;
+```
+
+The members of a struct variable may be accessed using the member access
+operator `.` (a dot) or the indirect member access operator `->` (an arrow) if
+the struct variable is a pointer:
+
+``` c
+struct_var.int_member = 0;
+struct_var->int_number = 0; // this statement is equivalent to: *struct_var.int_number = 0;
+```
+
+Structs may not only contain variables of other structs, but also their own
+variables. This allows a recursive definition, which is very powerful when used
+with pointers:
+
+``` c
+struct restaurant_order {
+    char description[100];
+    double price;
+    struct restaurant_order * next_order;
+};
+```
+
+This is an implementation of the
+[linked list](https://en.wikipedia.org/wiki/Linked_list) data structure. Each
+node (a restaurant order) is pointing to one other node. The linked list is
+terminated on the last node (in our example, this would be the last order) whose
+`next_order` variable would be assigned to `NULL`.
+
+A recursive struct definition can be tricky when used with `typedef`. It is not
+possible to declare a struct variable inside its own type by using its aliased
+definition, since the aliased definition by `typedef` does not exist before the
+`typedef` statement is evaluated:
+
+``` c
+typedef struct Mystruct {
+    // ...
+    struct Mystruct * pointer; // Mystruct * pointer; would cause a compile-time error
+} Mystruct;
+```
+
+The size of a struct type equals the sum of the sizes of all its members.
+
+
+### Unions
+
+The definition of a union is similar to that of a struct. The difference between
+the two is that in a struct, the members occupy different areas of memory, but
+in a union, the members occupy the same area of memory. Thus, in the following
+type, for example:
+
+``` c
+union {
+    int i;
+    double d;
+} u;
+```
+
+The programmer can access either `u.i` or `u.d`, but not both at the same time.
+Since `u.i` and `u.d` occupy the same area of memory, modifying one modifies the
+value of the other, sometimes in unpredictable ways.
+
+The size of a union is the size of its largest member.
+
+
+### Enumerations
+
+Enumerations are artificial data types representing associations between labels
+and integers. Unlike structs or unions, they are not composed of other data
+types. An example declaration:
+
+``` c
+enum color {
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    purple,
+} crayon_color;
+```
+
+In the example above, red equals 0, orange equals 1, ... and so each subsequent
+label is by 1 larger that the previous one. It is possible to assign values to
+labels within the integer range, but they must be a literal.
+
+Similar declaration syntax that applies for structs and unions also applies for
+enums. Also, one normally doesn't need to be concerned with the integers that
+labels represent:
+
+``` c
+enum weather weather_outside = rain;
+```
+
+This peculiar property makes enums especially convenient in switch-case
+statements:
+
+``` c
+enum weather {
+    sunny,
+    windy,
+    cloudy,
+    rain,
+} weather_outside;
+
+// ...
+
+switch (weather_outside) {
+case sunny:
+    wear_sunglasses();
+    break;
+case windy:
+    wear_windbreaker();
+    break;
+case cloudy:
+    get_umbrella();
+    break;
+case rain:
+    get_umbrella();
+    wear_raincoat();
+    break;
+}
+```
+
+## Pointers and arrays
+
+A [__pointer__](https://en.wikipedia.org/wiki/Pointer_%28computing%29) is a
+value that designates the address (i.e., the location in memory), of some value.
+Pointers are variables that hold a memory location.
+
+There are four fundamental things you need to know about pointers:
+
+* How to declare them
+  (with the address operator '`&`': `int *pointer = &variable;`)
+* How to assign to them (`pointer = NULL;`)
+* How to reference the value to which the pointer points (known as
+  dereferencing, by using the dereferencing operator '`*`': `value = *pointer;`)
+* How they relate to arrays (the vast majority of arrays in C are simple lists,
+  also called "1 dimensional arrays", but we will briefly cover
+  multi-dimensional arrays with some pointers in a
+  [later chapter](https://en.wikibooks.org/wiki/C_Programming/Common_practices#Dynamic_multidimensional_arrays)).
+
+Pointers can reference any data type, even functions. We'll also discuss the
+relationship of pointers with text strings 
