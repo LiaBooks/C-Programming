@@ -20,14 +20,11 @@ import:   https://raw.githubusercontent.com/liaTemplates/rextester/master/README
 
 # C-Programming
 
-
-
-
 > **Wikibooks Contributors Present:**
 >
 > A comprehensive look at the C programming language and its features.
 
-## Why learn C?
+# Why learn C?
 
 C is the most commonly used programming language for writing
 [operating systems](https://en.wikipedia.org/wiki/operating_systems). The first
@@ -47,7 +44,7 @@ as Latin was the basis of all of those languages, knowing C will enable you to
 understand and appreciate an entire family of programming languages built upon
 the traditions of C. Knowledge of C enables freedom.
 
-### Why C and not assembly language?
+## Why C and not assembly language?
 
 While [assembly language](https://en.wikipedia.org/wiki/Assembly_language) can
 provide speed and maximum control of the program, C provides portability.
@@ -88,7 +85,7 @@ media players and the like. Many of them will choose to program in the language
 that the higher-level library uses. And the pattern continues on and on and
 on...
 
-### Why C, and not another language?
+## Why C, and not another language?
 
 The primary design of C is to produce portable code while maintaining
 performance and minimizing footprint
@@ -133,7 +130,7 @@ high-level language is a matter of opinion and both technical and business
 requirements could dictate which language is required.
 
 
-## History
+# History
 
 The field of computing as we know it today started in 1947 with three scientists
 at Bell Telephone Laboratories —
@@ -197,9 +194,9 @@ implementations of C compilers. The standards were later updated in 1990 and
 1999, allowing for features that were either in common use, or were appearing in
 C++.
 
-## What you need before you can learn
+# What you need before you can learn
 
-### Getting Started
+## Getting Started
 
 The goal of this book is to introduce you to and teach you the C programming language. Basic computer literacy is assumed, but no special knowledge is needed.
 
@@ -304,9 +301,9 @@ need to be downloaded via Xcode->Preferences->Downloads. Footnotes
 
 [^2]: http://orwelldevcpp.blogspot.com/
 
-## Obtaining a compiler
+# Obtaining a compiler
 
-### Dev-C++
+## Dev-C++
 
 [Dev C++](https://en.wikipedia.org/wiki/Dev-C_Plus_Plus) is an Integrated
 Development Environment(IDE) for the C++ programming language, available from
@@ -353,7 +350,7 @@ __Steps for Obtaining Dev-C++ if You're on Windows__
    global PATH variable of the operating system to compile with gcc from a
    command prompt.
 
-### GCC
+## GCC
 
 The [GNU Compiler Collection](https://en.wikipedia.org/wiki/GNU_Compiler_Collection)
 (GCC) is a [free/libre](https://en.wikipedia.org/wiki/free_software) set of
@@ -479,7 +476,7 @@ family of compilers for several languages, such as C++,
 [Fortran](https://en.wikibooks.org/wiki/Fortran).
 
 
-### Embedded systems
+## Embedded systems
 
 Most CPUs are microcontrollers in embedded systems, often programmed in C, but
 most of the compilers mentioned above (except GCC) do not support such CPUs. For
@@ -487,7 +484,7 @@ specialized compilers that do support embedded systems, see
 [Embedded Systems/C Programming](https://en.wikibooks.org/wiki/Embedded_Systems/C_Programming).
 
 
-### Other C compilers
+## Other C compilers
 
 We have a long
 [list of C compilers](https://en.wikibooks.org/wiki/C_Programming/Compilers) in
@@ -495,7 +492,7 @@ a much later section of this Wikibook.
 _Which of those compilers would be suitable for beginning C programmers, that we should say a few words about getting started with that particular compiler in this section of this Wikibook?_
 
 
-## Intro exercise
+# Intro exercise
 
 __The "Hello, World!" Program__
 
@@ -515,7 +512,7 @@ int main(void)
 ```
 @run
 
-### Source code analysis
+## Source code analysis
 
 Below are described the parts the program is composed of. The various details
 will be introduced and explained in later chapters.
@@ -570,7 +567,7 @@ errors. This style of providing exit status is a long standing convention[^1].
 
 
 
-### Compiling
+## Compiling
 
 __Unix-like__
 
@@ -641,12 +638,12 @@ the executable from the IDE. The process is roughly the same on all IDEs.
 [^2]: https://gcc.gnu.org/onlinedocs/
 
 
-## Preliminaries
+# Preliminaries
 
 Before learning C syntax and programming constructs, it is important to learn
 the meaning of a few key terms that are central in understanding C.
 
-### Block Structure, Statements, Whitespace, and Scope
+## Block Structure, Statements, Whitespace, and Scope
 
 Next we'll discuss the __basic structure__ of a C program. If you're familiar
 with [PASCAL](https://en.wikipedia.org/wiki/Pascal_%28programming_language%29),
@@ -807,7 +804,7 @@ int main(void)
 ```
 @run
 
-### Basics of Using Functions
+## Basics of Using Functions
 
 __Functions__ are a big part of programming. A function is a special kind of
 block that performs a well-defined task. If a function is well-designed, it can
@@ -841,7 +838,7 @@ We will discuss functions in more detail in a later chapter,
 and functions.
 
 
-### The Standard Library
+## The Standard Library
 
 In 1983, when C was in the process of becoming standardized, the
 [American National Standards Institute](https://en.wikipedia.org/wiki/American_National_Standards_Institute)
@@ -857,7 +854,7 @@ is used (`printf`) which outputs lines of text to the
 [standard output](https://en.wikipedia.org/wiki/standard_output) stream.
 
 
-## Basics of compilation
+# Basics of compilation
 
 Having covered the basic concepts of C programming, we can now briefly discuss
 the process of compilation.
@@ -889,7 +886,7 @@ Without going into details, it can be beneficial to have a superficial
 understanding of the compilation process.
 
 
-### Preprocessor
+## Preprocessor
 
 The preprocessor provides the ability for the inclusion of so called header
 files, macro expansions, conditional compilation and line control. Many times
@@ -919,7 +916,7 @@ preprocessor can also be used independently to process other kinds of text
 files.
 
 
-### Syntax Checking
+## Syntax Checking
 
 This step ensures that the code is valid and will sequence into an executable
 program. Under most compilers, you may get messages or warnings indicating
@@ -931,7 +928,7 @@ When an error is detected in the program, the compiler will normally report the
 file name and line that is preventing compilation.
 
 
-### Object Code
+## Object Code
 
 The compiler produces a machine code equivalent of the source code that can be
 linked into the final program. At this point the code itself can't be executed,
@@ -945,7 +942,7 @@ only useful for
 [reverse engineering](https://en.wikipedia.org/wiki/Reverse_engineering).
 
 
-### Linking
+## Linking
 
 Linking combines the separate object files into one complete program by
 integrating libraries and the code and producing either an
@@ -956,7 +953,7 @@ performed by a linker program, which is often part of a compiler suite.
 Common errors during this stage are either missing or duplicate functions.
 
 
-### Automation
+## Automation
 
 For large C projects, many programmers choose to automate compilation, both in
 order to reduce user interaction requirements and to speed up the process by
@@ -1020,7 +1017,7 @@ it can do, and is usually started with 'gdb a.out' if a.out is the anonymous
 executable machine code file that was compiled by gcc. References
 
 
-## Structure and style
+# Structure and style
 
 This is a basic introduction to good coding style in the C Programming Language.
 It is designed to provide information on how to effectively use indentation,
@@ -1037,7 +1034,7 @@ overview of what the code does.
 In the following sections, we will attempt to explain good programming practices
 that will in turn make your programs clearer.
 
-### Introduction
+## Introduction
 
 In C, programs are composed of statements. Statements are terminated with a
 semi-colon, and are collected in sections known as functions. By convention, a
@@ -1074,14 +1071,14 @@ write code for such tasks in more detail. For now, focus on how the code looks,
 not what it does.
 
 
-### Line Breaks and Indentation
+## Line Breaks and Indentation
 
 The addition of white space inside your code is arguably the most important part
 of good code structure. Effective use of white space can create a visual scale
 of how your code flows, which can be very important when returning to your code
 when you want to maintain it.
 
-#### Line Breaks
+### Line Breaks
 
 > Note the use of line numbers. They are __not__ part of the actual code. They
 > are __only__ for reference.
@@ -1116,7 +1113,7 @@ return 0;
 @run
 
 
-#### Blank Lines
+### Blank Lines
 
 Blank lines should be used to offset the main components of your code. Always
 use them
@@ -1160,7 +1157,7 @@ return 0;
 But it's still not as readable as it can be.
 
 
-#### Indentation
+### Indentation
 
 Although adding simple line breaks between key blocks of code can make code
 easier to read, it provides no information about the block structure of the
@@ -1233,7 +1230,7 @@ characters is easier to read than 8 character indents[^2]. However, an indent of
       Linux Kernel Coding Style
 
 
-### Comments
+## Comments
 
 Comments in code can be useful for a variety of purposes. They provide the
 easiest way to set off specific parts of code (and their purpose); as well as
@@ -1263,7 +1260,7 @@ problems supporting them.
 
 This section is going to focus on the various uses of each form of commentary.
 
-#### Single-line Comments
+### Single-line Comments
 
 Single-line comments are most useful for simple 'side' notes that explain what
 certain parts of the code do. The best places to put these comments are next to
@@ -1303,7 +1300,7 @@ int main(void) {
 @run
 
 
-#### Multi-line Comments
+### Multi-line Comments
 
 > Single-line comments are a new feature, so many C programmers only use
 > multi-line comments.
@@ -1428,7 +1425,7 @@ automatically by using popular tools like Doxygen.[^4][^5]
       [Fedora Directory Server Coding Style](http://directory.fedoraproject.org/wiki/Coding_Style)
 
 
-## Variables
+# Variables
 
 Like most programming languages, C is able to use and process named variables
 and their contents. __Variables__ are simply names used to refer to some
@@ -1456,7 +1453,7 @@ on another.
 All variables in C are __typed__. That is, every variable declared must be
 assigned as a certain type of variable.
 
-### Declaring, Initializing, and Assigning Variables
+## Declaring, Initializing, and Assigning Variables
 
 Here is an example of declaring an integer, which we've called `some_number`.
 (Note the semicolon at the end of the line; that is how your compiler separates
@@ -1514,7 +1511,7 @@ This is because the assignment `x = y` returns the value of the assignment, `y`.
 For example, `some_number = 3` returns 3. That said, `x = y = z` is really a
 shorthand for `x = (y = z)`.
 
-#### Naming Variables
+### Naming Variables
 
 Variable names in C are made up of letters (upper and lower case) and digits.
 The underscore character ("\_") is also permitted. Names must not begin with a
@@ -1573,7 +1570,7 @@ later.
       written in C.
 
 
-### Literals
+## Literals
 
 Anytime within a program in which you specify a value explicitly instead of
 referring to a variable or some other form of data, that value is referred to as
@@ -1584,13 +1581,13 @@ its type.[citation needed] Hex numbers are always preceded with 0x. For now,
 though, you probably shouldn't be too concerned with hex.
 
 
-### The Four Basic Data Types
+## The Four Basic Data Types
 
 In Standard C there are four basic data types. They are `int`, `char`, `float`,
 and `double`.
 
 
-#### The `int` type
+### The `int` type
 
 The `int` type stores integers in the form of "whole numbers". An integer is
 typically the size of one machine word, which on most modern home PCs is 32 bits
@@ -1611,7 +1608,7 @@ In this declaration we declare 3 variables, `numberOfStudents`, `i` and `j`, `j`
 here is assigned the literal 5.
 
 
-#### The `char` type
+### The `char` type
 
 The `char` type is capable of holding any member of the execution
 [character set](https://en.wikipedia.org/wiki/Character_encoding#Character_sets.2C_maps_and_code_pages).
@@ -1674,7 +1671,7 @@ printf("Square brackets after a variable name means it is a pointer to a string 
 ```
 
 
-#### The `float` type
+### The `float` type
 
 `float` is short for __floating point__. It stores inexact representations of
 real numbers, both integer and non-integer values. It can be used with numbers
@@ -1703,7 +1700,7 @@ one machine word in size. Therefore, it is used when less precision than a
       offer more data types for real numbers and very large numbers.
 
 
-#### The `double` type
+### The `double` type
 
 The `double` and `float` types are very similar. The `float` type allows you to
 store single-precision floating point numbers, while the `double` keyword allows
@@ -1723,7 +1720,7 @@ doubles instead of floats when you declare a `float` variable.
 If you want to use a `double` variable, use the `double` keyword.
 
 
-### `sizeof`
+## `sizeof`
 
 If you have any doubts as to the amount of memory actually used by any variable
 (and this goes for types we'll discuss later, also), you can use the `sizeof`
@@ -1759,7 +1756,7 @@ sizeof(char)
 always returns 1.
 
 
-### Data type modifiers
+## Data type modifiers
 
 One can alter the data storage of any data type by preceding it with certain
 modifiers.
@@ -1798,7 +1795,7 @@ unsigned long uli;       /* unsigned long int */
 ```
 
 
-### `const` qualifier
+## `const` qualifier
 
 When the `const` qualifier is used, the declared variable must be initialized at
 declaration. It is then not allowed to be changed.
@@ -1815,7 +1812,7 @@ made to change a `const` variable - but after doing so the compiler is free to
 ignore the `const` qualifier.
 
 
-### Magic numbers
+## Magic numbers
 
 When you write C programs, you may be tempted to write code that will depend on
 certain numbers. For example, you may be writing a program for a grocery store.
@@ -1833,7 +1830,7 @@ approximately equivalent, though one method can be useful in one circumstance,
 over another.
 
 
-#### Using the `const` keyword
+### Using the `const` keyword
 
 The `const` keyword helps eradicate __magic numbers__. By declaring a variable
 `const` corn at the beginning of a block, a programmer can simply change that
@@ -1844,7 +1841,7 @@ flexible than `const`, and also much more problematic in many ways. It also
 involves the preprocessor, as opposed to the compiler. Behold...
 
 
-#### `#define`
+### `#define`
 
 When you write programs, you can create what is known as a macro, so when the
 computer is reading your code, it will replace all instances of a word with the
@@ -1883,7 +1880,7 @@ with a semicolon; in fact, some compilers may warn you about unnecessary tokens
 in your code if you do.
 
 
-### Scope
+## Scope
 
 In the Basic Concepts section, the concept of scope was introduced. It is
 important to revisit the distinction between local types and global types, and
@@ -1901,7 +1898,7 @@ situation where local variables may create more obtuse and unreadable code,
 there's no shame in using globals.
 
 
-### Other Modifiers
+## Other Modifiers
 
 Included here, for completeness, are more of the modifiers that standard C
 provides. For the beginning programmer, `static` and `extern` may be useful.
@@ -1910,7 +1907,7 @@ are largely deprecated and are generally not of interest to either beginning or
 advanced programmers.
 
 
-#### static
+### static
 
 `static` is sometimes a useful keyword. It is a common misbelief that the only
 purpose is to make a variable stay in memory.
@@ -2006,7 +2003,7 @@ __Features of static variables:__
       - `NULL` or `0`, which should you use?
 
 
-#### `extern`
+### `extern`
 
 `extern` is used when a file needs to access a variable in another file that it
 may not have `#included` directly. Therefore, `extern` does not actually carve
@@ -2023,7 +2020,7 @@ __Features of extern variable:__
 6. Keyword optionality - Optional if declared outside all the functions
 
 
-#### `volatile`
+### `volatile`
 
 `volatile` is a special type of modifier which informs the compiler that the
 value of the variable may be changed by external entities other than the program
@@ -2035,7 +2032,7 @@ aren't. volatile is particularly relevant when working with embedded systems
 applications.
 
 
-#### `auto`
+### `auto`
 
 `auto` is a modifier which specifies an "automatic" variable that is
 automatically created when in scope and destroyed when out of scope. If you
@@ -2055,7 +2052,7 @@ __Features of automatic variables:__
 6. Keyword optionality - Optional
 
 
-#### `register`
+### `register`
 
 `register` is a hint to the compiler to attempt to optimize the storage of the
 given variable by storing it in a register of the computer's CPU when the
@@ -2074,7 +2071,7 @@ __Features of `register` variables:__
 6. Keyword optionality - Mandatory to use the keyword
 
 
-### Concepts
+## Concepts
 
 * [Variables](https://en.wikibooks.org/wiki/Computer_Programming/Variables)
 * [Types](https://en.wikibooks.org/wiki/Computer_Programming/Types)
@@ -2082,13 +2079,13 @@ __Features of `register` variables:__
 * [Arrays](https://en.wikibooks.org/wiki/Data_Structures/Arrays)
 
 
-### In this section
+## In this section
 
 * C variables
   * [C arrays](https://en.wikibooks.org/wiki/C_Programming/Arrays)
 
 
-## Simple input and output
+# Simple input and output
 
 When you take time to consider it, a computer would be pretty useless without
 some way to talk to the people who use it. Just like we need information in
@@ -2108,7 +2105,7 @@ text, we were introduced to a Standard Library file `stdio.h`, and one of its
 functions, `printf()`. Here we discuss more of the functions that `stdio.h`
 gives us.
 
-### Output using `printf()`
+## Output using `printf()`
 
 Recall from the beginning of this text the demonstration program duplicated
 below:
@@ -2163,9 +2160,9 @@ This sentence will print out exactly as you see it...
 ```
 
 
-#### Printing numbers and escape sequences
+### Printing numbers and escape sequences
 
-##### Placeholder codes
+#### Placeholder codes
 
 The `printf()` function is a powerful function, and is probably the most-used
 function in C programs.
@@ -2215,7 +2212,7 @@ A complete listing of all the format specifiers for `printf()` is on Wikipedia.
       [Wikipedia article on C data types](https://en.wikipedia.org/wiki/C_data_types).
 
 
-##### Tabs and newlines
+#### Tabs and newlines
 
 What if, we want to achieve some output that will look like:
 
@@ -2263,9 +2260,9 @@ to ring the computer's bell, but you should not use this very much in your
 programs, as excessive use of sound is not very friendly to the user.
 
 
-### Other output methods
+## Other output methods
 
-#### `puts()`
+### `puts()`
 
 The `puts()` function is a very simple way to send a string to the screen when
 you have no placeholders or variables to be concerned about. It works very much
@@ -2285,7 +2282,7 @@ followed by the newline character (as discussed above). (The `puts` function
 appends a newline character to its output.)
 
 
-### Input using `scanf()`
+## Input using `scanf()`
 
 The `scanf()` function is the input method equivalent to the `printf()` output
 function - simple yet powerful. In its simplest invocation, the `scanf` format
@@ -2358,16 +2355,16 @@ that if you take your code to a different computer with a different compiler,
 your code may not work properly.
 
 
-## Operators and type casting
+# Operators and type casting
 
 
-### Operators and Assignments
+## Operators and Assignments
 
 C has a wide range of operators that make simple math easy to handle. The list
 of operators grouped into precedence levels is as follows:
 
 
-#### Primary expressions
+### Primary expressions
 
 _Identifiers_ are names of things in C, and consist of either a letter or an
 underscore ( `_` ) optionally followed by letters, digits, or underscores. An
@@ -2395,7 +2392,7 @@ value is the expression that follows the type of the initial expression or the
 default if not found.
 
 
-#### Postfix operators
+### Postfix operators
 
 First, a primary expression is also a postfix expression. The following
 expressions are also postfix expressions:
@@ -2430,7 +2427,7 @@ expression before the increment or decrement. These operators only work on
 integers and pointers.
 
 
-#### Unary expressions
+### Unary expressions
 
 First, a postfix expression is a unary expression. The following expressions are
 all unary expressions:
@@ -2459,7 +2456,7 @@ The keyword `sizeof` followed by a parenthesized type name is a unary
 expression. The value is the size of the type in bytes.
 
 
-#### Cast operators
+### Cast operators
 
 A cast expression is a unary expression.
 
@@ -2485,7 +2482,7 @@ int my_int = (int) my_char; // On machines which use ASCII as the character set,
 ```
 
 
-#### Multiplicative and additive operators
+### Multiplicative and additive operators
 
 In C, simple math is very easy to handle. The following operators exist: `+`
 (addition), `-` (subtraction), `*` (multiplication), / (division), and `%`
@@ -2549,7 +2546,7 @@ i: 5    j: 5
 ```
 
 
-#### The shift operators (which may be used to rotate bits)
+### The shift operators (which may be used to rotate bits)
 
 Shift functions are often used in low-level I/O hardware interfacing. Shift and
 rotate functions are heavily used in cryptography and software floating point
@@ -2562,14 +2559,14 @@ operators to a single assembly-language instruction -- see
 [X86 Assembly/Shift and Rotate](https://en.wikibooks.org/wiki/X86_Assembly/Shift_and_Rotate).
 
 
-##### shift left
+#### shift left
 
 The `<<` operator shifts the binary representation to the left, dropping the
 most significant bits and appending it with zero bits. The result is equivalent
 to multiplying the integer by a power of two.
 
 
-##### unsigned shift right
+#### unsigned shift right
 
 The unsigned shift right operator, also sometimes called the logical right shift
 operator. It shifts the binary representation to the right, dropping the least
@@ -2577,7 +2574,7 @@ significant bits and prepending it with zeros. The `>>` operator is equivalent
 to division by a power of two for unsigned integers.
 
 
-##### signed shift right
+#### signed shift right
 
 The signed shift right operator, also sometimes called the arithmetic right
 shift operator. It shifts the binary representation to the right, dropping the
@@ -2589,7 +2586,7 @@ Therefore, a signed and an unsigned right shift looks exactly the same, but
 produces a different result in some cases.
 
 
-##### rotate right
+#### rotate right
 
 Contrary to popular belief, it is possible to write C code that compiles down to the "rotate" assembly language instruction (on CPUs that have such an instruction).
 
@@ -2619,7 +2616,7 @@ standard header file like `bitops.h`. [^3]
       than copy-and-paste into a new program.
 
 
-##### rotate left
+#### rotate left
 
 Most compilers recognize this idiom:
 
@@ -2637,7 +2634,7 @@ function called something like `leftrotate32` or `rotl32` in a header file like
 `"bitops.h"`.
 
 
-#### Relational and equality operators
+### Relational and equality operators
 
 The relational binary operators `<` (less than), `>` (greater than), `<=` (less
 than or equal), and `>=` (greater than or equal) operators return a value of 1
@@ -2647,7 +2644,7 @@ The equality binary operators `==` (equals) and `!=` (not equals) operators are
 similar to the relational operators except that their precedence is lower.
 
 
-#### Bitwise operators
+### Bitwise operators
 
 The bitwise operators are `&` (and), `^` (exclusive or) and `|` (inclusive or).
 The `&` operator has higher precedence than `^`, which has higher precedence
@@ -2678,7 +2675,7 @@ if (bitbucket & BITFLAG3) {
 ```
 
 
-#### Logical operators
+### Logical operators
 
 The logical operators are `&&` (and), and `||` (or). Both of these operators
 produce 1 if the relationship is true and 0 for false. Both of these operators
@@ -2737,7 +2734,7 @@ found in other languages. It instead interprets a 0 as false, and any nonzero
 value as true.
 
 
-#### Conditional operators
+### Conditional operators
 
 The ternary ?: operator is the conditional operator. The expression (`x ? y : z`)
 has the value of `y` if `x` is nonzero, `z` otherwise.
@@ -2757,7 +2754,7 @@ The expression x evaluates to 0. The ternary operator then looks for the
 six. Had `x` been a non-zero, then the expression would have returned a 10.
 
 
-#### Assignment operators
+### Assignment operators
 
 The assignment operators are `=`, `*=`, `/=`, `%=`, `+=`, `-=`, `<<=`, `>>=`, `&=`, `^=`,
 and `|=`. The `=` operator stores the value of the right operand into the
@@ -2779,7 +2776,7 @@ the assignment. Thus, assignments can be chained; e.g. the expression
 `a = b = c = 0;` would assign the value zero to all three variables.
 
 
-#### Comma operator
+### Comma operator
 
 The operator with the least precedence is the comma operator. The value of the
 expression `x`, `y` will evaluate both `x` and `y`, but provides the value of `y`.
@@ -2800,7 +2797,7 @@ for (x = 0, i = 0; i <= 6; i++) {
 ```
 
 
-## Arrays and strings
+# Arrays and strings
 
 Arrays in C act to store related data under a single variable name with an
 index, also known as a subscript. It is easiest to think of an array as simply a
@@ -2811,7 +2808,7 @@ Later we will consider the concept of a pointer, fundamental to C, which extends
 the nature of the array (array can be termed as a constant pointer). For now, we
 will consider just their declaration and their use.
 
-### Arrays
+## Arrays
 
 C arrays are declared in the following form:
 
@@ -2975,7 +2972,7 @@ next Chapter.)
 
 [^3]: [MINC/Reference/MINC1-volumeio-programmers-reference](https://en.wikibooks.org/wiki/MINC/Reference/MINC1-volumeio-programmers-reference)
 
-### Strings
+## Strings
 
 C has no string handling facilities built in; consequently, strings are defined
 as arrays of characters. C allows a character array to be represented by a
@@ -3034,7 +3031,7 @@ This standard string library will allow various tasks to be performed on
 strings, and is discussed in the Strings chapter.
 
 
-## Program flow control
+# Program flow control
 
 Very few programs follow exactly one control path and have each instruction
 stated explicitly. In order to program effectively, it is necessary to
@@ -3052,7 +3049,7 @@ empty, as in `{}`. Blocks can also be nested; i.e. there can be blocks of code
 within larger blocks.
 
 
-### Conditionals
+## Conditionals
 
 There is likely no meaningful program written in which a computer does not
 demonstrate basic decision-making skills. It can actually be argued that there
@@ -3086,7 +3083,7 @@ typically associated with logic:
 [^1]: [C FAQ](http://www.c-faq.com/bool/bool2.html)
 
 
-#### Relational and Equivalence Expressions
+### Relational and Equivalence Expressions
 
 |Expression| Explained                                              |
 |:--------:|--------------------------------------------------------|
@@ -3172,7 +3169,7 @@ if (0 < value && value < 10) {   // the && means "and"
 ```
 
 
-#### Logical Expressions
+### Logical Expressions
 
 |Expression| Explained                                              |
 |:--------:|--------------------------------------------------------|
@@ -3216,7 +3213,7 @@ while (doThis() || doThat()) ...
 `doThat()` is never called if `doThis()` returns a non-zero (true) value.
 
 
-#### The If-Else statement
+### The If-Else statement
 
 If-Else provides a way to instruct the computer to execute a block of code only
 if certain conditions have been met. The syntax of an If-Else construct is:
@@ -3289,7 +3286,7 @@ statements. The bottom line is that it is usually best to insert an else clause
 for all cases in which a conditional will not evaluate to non-zero (true).
 
 
-##### The conditional expression
+#### The conditional expression
 
 A conditional expression is a way to set values conditionally in a more
 shorthand fashion than If-Else. The syntax is:
@@ -3316,7 +3313,7 @@ As tempting as it is to assume that fewer lines of code result in faster
 execution times, there is no such correlation.
 
 
-#### The Switch-Case statement
+### The Switch-Case statement
 
 Say you write a program where the user inputs a number 1-5 (corresponding to
 student grades, A(represented as 1)-D(4) and F(5)), stores it in a variable
@@ -3431,7 +3428,7 @@ user defined `enum` data types. Some compilers are capable of warning about an
 unhandled `enum` value, which may be helpful for avoiding bugs.
 
 
-### Loops
+## Loops
 
 Often in computer programming, it is necessary to perform a certain action a
 certain number of times or until a certain condition is met. It is impractical
@@ -3445,7 +3442,7 @@ constructs that enable computers to perform certain repetitive tasks are called
 loops.
 
 
-#### While loops
+### While loops
 
 A while loop is the most basic type of loop. It will run as long as the
 condition is non-zero (true). For example, if you try the following, the program
@@ -3534,7 +3531,7 @@ range from 4 down to 0 (inside the loop). Conveniently, these are the values
 needed to access every item of an array containing 5 elements.
 
 
-#### For loops
+### For loops
 
 For loops generally look something like this:
 
@@ -3668,7 +3665,7 @@ for (i = n; --i;)
 printf("\n");
 ```
 
-#### Do-While loops
+### Do-While loops
 
 A DO-WHILE loop is a post-check while loop, which means that it checks the
 condition after each run. As a result, even if the condition is zero (false), it
@@ -3691,7 +3688,7 @@ at least once, but While loops will not execute at all if their condition is 0
 (false) on the first evaluation.
 
 
-#### One last thing: `goto`
+### One last thing: `goto`
 
 `goto` is a very simple and traditional control mechanism. It is a statement
 used to immediately and unconditionally jump to another line of code. To use
@@ -3780,7 +3777,7 @@ Another accepted use is the creation of a state machine. This is a fairly
 advanced topic though, and not commonly needed.
 
 
-### Examples
+## Examples
 
 ``` c
 #include <errno.h>
@@ -3803,7 +3800,7 @@ int main(void)
 @run
 
 
-## Procedures and functions
+# Procedures and functions
 
 In C programming, all executable code resides within a function. A function is a
 named block of code that performs a task and then returns control to a caller.
@@ -3895,7 +3892,7 @@ function. It only executes a procedure.
 This is precisely what functions are for.
 
 
-### More on functions
+## More on functions
 
 A function is like a black box. It takes in input, does something with it, then
 spits out an answer.
@@ -3915,7 +3912,7 @@ We have some terminology to refer to functions:
   answer. For example, g returns the sum of its arguments.
 
 
-#### Writing functions in C
+### Writing functions in C
 
 It's always good to learn by example. Let's write a function that will return
 the square of a number.
@@ -3973,7 +3970,7 @@ Note this should look familiar - you have been writing functions already, in
 fact - main is a function that is always written.
 
 
-##### In general
+#### In general
 
 In general, if we want to declare a function, we write
 
@@ -4027,7 +4024,7 @@ Naturally, you can combine both void return and void in arguments together to
 get a valid function, also.
 
 
-##### Recursion
+#### Recursion
 
 Here's a simple function that does an infinite loop. It prints a line and calls
 itself, which again prints a line and calls itself again, and this continues
@@ -4064,7 +4061,7 @@ the end of a linked list, parsing a tree structure in a database and factorising
 numbers (and finding primes) among other things.
 
 
-##### Static functions
+#### Static functions
 
 If a function is to be called only from within the file in which it is declared,
 it is appropriate to declare it as a static function. When a function is
@@ -4081,7 +4078,7 @@ static int compare( int a, int b )
 ```
 
 
-### Using C functions
+## Using C functions
 
 We can now write functions, but how do we use them? When we write main, we place
 the function outside the braces that encompass main.
@@ -4110,7 +4107,7 @@ say_hello();
 since we don't need a variable to catch its return value.
 
 
-### Functions from the C Standard Library
+## Functions from the C Standard Library
 
 While the C language doesn't itself contain functions, it is usually linked with
 the C Standard Library. To use this library, you need to add an `#include`
@@ -4235,7 +4232,7 @@ C89/C90 (the functions available are):
 * `time_t timegm(struct tm *brokentime)`
 
 
-### Variable-length argument lists
+## Variable-length argument lists
 
 Functions with variable-length argument lists are functions that can
 take a varying number of arguments. An example in the C standard library
@@ -4343,7 +4340,7 @@ float average (int n_args, ...)
 By calling `average(2, 10, 20)`, we get the average of 10 and 20, which is 15.
 
 
-## Standard libraries
+# Standard libraries
 
 The __C standard library__ is a standardized collection of
 [header files](https://en.wikipedia.org/wiki/header_file) and library routines
@@ -4353,7 +4350,7 @@ include builtin keywords for these tasks, so nearly all C programs rely on the
 standard library to operate.
 
 
-### History
+## History
 
 The C programming language previously did not provide any elementary functions,
 such as I/O operations. Over time, user communities of C shared ideas and
@@ -4391,7 +4388,7 @@ published in 1999.
 > the C-style names are still available, although deprecated).
 
 
-### Design
+## Design
 
 The declaration of each function is kept in a header file, while the actual
 implementation of functions are separated into a library file. The naming and
@@ -4411,7 +4408,7 @@ primitive [lexical analyser](https://en.wikipedia.org/wiki/lexical_analysis) but
 is highly "fragile" and difficult to use.
 
 
-### ANSI Standard
+## ANSI Standard
 
 The ANSI C standard library consists of 24 C header files which can be included
 into a programmer's project with a single directive. Each header file contains
@@ -4439,7 +4436,7 @@ familiar with different sets of libraries, and a different set of them may be
 available on any particular platform.
 
 
-#### ANSI C library header files
+### ANSI C library header files
 
 * [`<assert.h>`](https://en.wikipedia.org/wiki/Assert.h)
   Contains the assert macro, used to assist with detecting logical errors and
@@ -4530,7 +4527,7 @@ available on any particular platform.
   For classifying wide characters. (New with __NA1__)
 
 
-### Common support libraries
+## Common support libraries
 
 While not standardized, C programs may depend on a runtime library of routines
 which contain code the compiler uses at runtime. The code that initializes the
@@ -4551,7 +4548,7 @@ C Runtime Library is not a standardized part of the language and is
 vendor-specific.
 
 
-### Compiler built-in functions
+## Compiler built-in functions
 
 Some compilers (for example, [GCC](https://en.wikipedia.org/wiki/GCC)) provide
 built-in versions of many of the functions in the C standard library; that is,
@@ -4564,7 +4561,7 @@ built-in variants), but may cause confusion when debugging (for example, the
 built-in versions cannot be replaced with instrumented variants).
 
 
-### POSIX standard library
+## POSIX standard library
 
 POSIX, (along with the Single Unix Specification), specifies a number of
 routines that should be available over and above those in the C standard library
@@ -4636,11 +4633,11 @@ The following libraries are recognized by POSIX:
   generated file, so it is not necessary to use -l y.)
 
 
-## Beginning exercises
+# Beginning exercises
 
-### Variables
+## Variables
 
-#### Naming
+### Naming
 
 1. Can a variable name start with a number?
 
@@ -4661,7 +4658,7 @@ The following libraries are recognized by POSIX:
        </script>
 
 
-#### Data Types
+### Data Types
 
 1. List at least three data types in C
    * On your computer, how much memory does each require?
@@ -4674,7 +4671,7 @@ The following libraries are recognized by POSIX:
    variable?
 
 
-#### Assignment
+### Assignment
 
 1. How would you assign the value 3.14 to a variable called `pi`?
 2. Is it possible to assign an `int` to a `double`?
@@ -4682,7 +4679,7 @@ The following libraries are recognized by POSIX:
    1. Is the reverse possible?
 
 
-#### Referencing
+### Referencing
 
 1. A common mistake for new students is reversing the assignment statement.
    Suppose you want to assign the value stored in the variable "pi" to another
@@ -4697,15 +4694,15 @@ The following libraries are recognized by POSIX:
 
      b. Would the reverse be a valid or invalid C statement?
 
-### Simple I/O
+## Simple I/O
 
-#### String manipulation
+### String manipulation
 
 1. Write a program that prompts the user for a string, and prints its reverse.
 2. Write a program that prompts the user for a sentence, and prints each word on
    its own line.
 
-#### Loops
+### Loops
 
 1. Write a function that outputs a right isosceles triangle of height and width
    `n`, so `n = 3` would look like
@@ -4742,7 +4739,7 @@ The following libraries are recognized by POSIX:
    ```
 
 
-### Program Flow
+## Program Flow
 
 1. Build a program where control passes from main to four different functions
    with 4 calls.
@@ -4756,7 +4753,7 @@ The following libraries are recognized by POSIX:
    goes
 
 
-### Functions
+## Functions
 
 1. Write a function to check if an integer is negative; the declaration should
    look like `bool is_positive(int i);`
@@ -4770,7 +4767,7 @@ The following libraries are recognized by POSIX:
    ```
 
 
-### Math
+## Math
 
 1. Write a function to calculate if a number is prime. Return 1 if it is prime
    and 0 if it is not a prime.
@@ -4782,9 +4779,9 @@ The following libraries are recognized by POSIX:
 6. Write a function to determine the prime `number(s)` between 2 and 100.
 
 
-### Recursion
+## Recursion
 
-#### Merge sort
+### Merge sort
 
 Write a C program to generate a random integer array with a given length n, and
 sort it recursively using the Merge sort algorithm.
@@ -4808,7 +4805,7 @@ The merge sort algorithm is a recursive algorithm .
   equal size, and then copy back the final sorted array onto the original array.
 
 
-#### Binary heaps
+### Binary heaps
 
 A binary max-heap or min-heap, is an ordered structure where some nodes are
 guaranteed greater than other nodes, e.g. the parent vs two children. A binary
@@ -4840,7 +4837,7 @@ heap can be stored in an array, where,
     a priority queue.
 
 
-#### Dijkstra's algorithm
+### Dijkstra's algorithm
 
 Dijkstra's algorithm is a searching algorithm using a priority queue. It begins
 with inserting the start node with a priority value of 0. All other nodes are
@@ -4876,7 +4873,7 @@ order of the array, to give the shortest path to target node from the start
 node.
 
 
-#### Quick sort
+### Quick sort
 
 Write a C program to recursively sort using the Quick sort partition exchange
 algorithm.
@@ -4961,7 +4958,7 @@ the plus one the intended initial scan positions, and use the pre-increment and
 pre-decrement operators e.g. ( ++i, --i) .
 
 
-## Advanced data types
+# Advanced data types
 
 In the chapter
 [Variables](https://en.wikibooks.org/wiki/C_Programming/Variables) we looked at
@@ -4969,7 +4966,7 @@ the primitive data types. However advanced data types allow us greater
 flexibility in managing data in our program.
 
 
-### Structs
+## Structs
 
 Structs are data types made of variables of other data types (possibly including
 other structs). They are used to group pieces of information into meaningful
@@ -5053,7 +5050,7 @@ typedef struct Mystruct {
 The size of a struct type equals the sum of the sizes of all its members.
 
 
-### Unions
+## Unions
 
 The definition of a union is similar to that of a struct. The difference between
 the two is that in a struct, the members occupy different areas of memory, but
@@ -5074,7 +5071,7 @@ value of the other, sometimes in unpredictable ways.
 The size of a union is the size of its largest member.
 
 
-### Enumerations
+## Enumerations
 
 Enumerations are artificial data types representing associations between labels
 and integers. Unlike structs or unions, they are not composed of other data
@@ -5134,7 +5131,7 @@ case rain:
 }
 ```
 
-## Pointers and arrays
+# Pointers and arrays
 
 A [__pointer__](https://en.wikipedia.org/wiki/Pointer_%28computing%29) is a
 value that designates the address (i.e., the location in memory), of some value.
@@ -5182,7 +5179,7 @@ stores the address of b in memory (1462)
 ``````````
 
 
-### Declaring pointers
+## Declaring pointers
 
 Consider the following snippet of code which declares two pointers:
 
@@ -5229,7 +5226,7 @@ int MyFunction( struct MyStruct *pStruct );
 ```
 
 
-### Assigning values to pointers
+## Assigning values to pointers
 
 So far we've discussed how to declare pointers. The process of assigning values
 to pointers is next. To assign the address of a variable to a pointer, the `&`
@@ -5298,7 +5295,7 @@ the above function, the value returned points to a static variable. Returning a
 pointer to dynamically allocated memory is also valid.
 
 
-### Pointer dereferencing
+## Pointer dereferencing
 
 To access a value to which a pointer points, the `*` operator is used. Another
 operator, the `->` operator is used in conjunction with pointers to structures.
@@ -5347,7 +5344,7 @@ the variable to point to some specified type before you can dereference it.
 Pointer arithmetic is also not valid with `void *` pointers.
 
 
-### Pointers and Arrays
+## Pointers and Arrays
 
 Up to now, we've carefully been avoiding discussing arrays in the context of
 pointers. The interaction of pointers and arrays can be confusing but here are
@@ -5501,7 +5498,7 @@ for (i=0; i<10; ++i) {
 ```
 
 
-### Pointers in Function Arguments
+## Pointers in Function Arguments
 
 Often we need to invoke a function with an argument that is itself a pointer. In
 many instances, the variable is itself a parameter for the current function and
@@ -5535,7 +5532,7 @@ int FunctTwo( struct someStruct *pStruct, int *mValue )
 ```
 
 
-### Pointers and Text Strings
+## Pointers and Text Strings
 
 Historically, text strings in C have been implemented as arrays of characters,
 with the last byte in the string being a zero, or the null character '\0'. Most
@@ -5579,7 +5576,7 @@ The library functions that are used with strings are discussed in a later
 chapter.
 
 
-### Pointers to Functions
+## Pointers to Functions
 
 C also allows you to create pointers to functions. Pointers to functions can get
 rather messy. Declaring a `typedef` to a function pointer generally clarifies
@@ -5651,7 +5648,7 @@ state. When some event occurs, the appropriate function is called through a
 function pointer in the current state. Practical use of function pointers in C
 
 
-### Practical use of function pointers in C
+## Practical use of function pointers in C
 
 Function pointers are mainly used to reduce the complexity of switch statement.
 Example with switch statement:
@@ -5805,7 +5802,7 @@ device create_device(void)
 ```
 
 
-### Examples of pointer constructs
+## Examples of pointer constructs
 
 Below are some example constructs which may aid in creating your pointer.
 
@@ -5833,7 +5830,7 @@ int (*fpf())(); // function 'fpf' with return value of a pointer to function whi
 ```
 
 
-### `sizeof`
+## `sizeof`
 
 The `sizeof` operator is often used to refer to the size of a static array
 declared earlier in the same function.
@@ -5971,7 +5968,7 @@ It's worth mentioning that sizeof operator has two variations: `sizeof (type)`
 (for instance: `sizeof (int)` or `sizeof (struct some_structure)`) and `sizeof`
 expression (for instance: `sizeof some_variable.some_field` or `sizeof 1`).
 
-### External Links
+## External Links
 
 !?[Pointer Fun with Binky](https://upload.wikimedia.org/wikipedia/commons/e/e5/Pointer_Fun_with_Binky_%28C%29.ogv)
 
@@ -5981,7 +5978,7 @@ expression (for instance: `sizeof some_variable.some_field` or `sizeof 1`).
   by Dave Marshall
 
 
-## Memory management
+# Memory management
 
 In C, you have already considered creating variables for use in the program. You
 have created some arrays for use, but you may have already noticed some
@@ -5991,3 +5988,551 @@ limitations:
 * the size of the array cannot be changed in the duration of your program
 
 _Dynamic memory allocation_ in C is a way of circumventing these problems.
+
+
+## The `malloc` function
+
+```c
+#include <stdlib.h>
+void *calloc(size_t nmemb, size_t size);
+void free(void *ptr);
+void *malloc(size_t size);
+void *realloc(void *ptr, size_t size);
+```
+
+The standard C function `malloc` is the means of implementing dynamic memory
+allocation. It is defined in `stdlib.h` or `malloc.h`, depending on what
+operating system you may be using. `malloc.h` contains only the definitions for
+the memory allocation functions and not the rest of the other functions defined
+in `stdlib.h`. Usually you will not need to be so specific in your program, and
+if both are supported, you should use `<stdlib.h>`, since that is ANSI C, and
+what we will use here.
+
+The corresponding call to release allocated memory back to the operating system
+is `free`.
+
+When dynamically allocated memory is no longer needed, free should be called to
+release it back to the memory pool. Overwriting a pointer that points to
+dynamically allocated memory can result in that data becoming inaccessible. If
+this happens frequently, eventually the operating system will no longer be able
+to allocate more memory for the process. Once the process exits, the operating
+system is able to free all dynamically allocated memory associated with the
+process.
+
+Let's look at how dynamic memory allocation can be used for arrays.
+
+Normally when we wish to create an array we use a declaration such as
+
+```c
+int array[10];
+```
+
+Recall array can be considered a pointer which we use as an array. We specify
+the length of this `array` is 10 ints. After `array[0]`, nine other integers
+have space to be stored consecutively.
+
+Sometimes it is not known at the time the program is written how much memory
+will be needed for some data. In this case we would want to dynamically allocate
+required memory after the program has started executing. To do this we only need
+to declare a pointer, and invoke `malloc` when we wish to make space for the
+elements in our array, or, we can tell `malloc` to make space when we first
+initialize the array. Either way is acceptable and useful.
+
+We also need to know how much an int takes up in memory in order to make room
+for it; fortunately this is not difficult, we can use C's builtin `sizeof`
+operator. For example, if `sizeof(int)` yields 4, then one int takes up 4 bytes.
+Naturally, `2*sizeof(int)` is how much memory we need for 2 ints, and so on.
+
+So how do we `malloc` an array of ten ints like before? If we wish to declare
+and make room in one hit, we can simply say
+
+```c
+int *array = malloc(10*sizeof(int));
+```
+
+We only need to declare the pointer; `malloc` gives us some space to store the
+10 ints, and returns the pointer to the first element, which is assigned to that
+pointer.
+
+**Important note!** `malloc` does not initialize the `array`; this means that
+the array may contain random or unexpected values! Like creating arrays without
+dynamic allocation, the programmer must initialize the array with sensible
+values before using it. Make sure you do so, too. (See later the function memset
+for a simple method.)
+
+It is not necessary to immediately call `malloc` after declaring a pointer for
+the allocated memory. Often a number of statements exist between the declaration
+and the call to `malloc`, as follows:
+
+```c
+int *array = NULL;
+printf("Hello World!!!");
+/* more statements */
+array = malloc(10*sizeof(int)); /* delayed allocation */
+/* use the array */
+```
+
+
+### Error checking
+
+When we want to use `malloc`, we have to be mindful that the pool of memory
+available to the programmer is finite. As such, we can conceivably run out of
+memory! In this case, `malloc` will return `NULL`. In order to stop the program
+crashing from having no more memory to use, one should always check that
+`malloc` has not returned NULL before attempting to use the memory; we can do
+this by
+
+```c
+int *pt = malloc(3 * sizeof(int));
+if(pt == NULL)
+{
+   fprintf(stderr, "Out of memory, exiting\n");
+   exit(1);
+}
+```
+
+Of course, suddenly quitting as in the above example is not always appropriate,
+and depends on the problem you are trying to solve and the architecture you are
+programming for. For example, if the program is a small, non critical
+application that's running on a desktop quitting may be appropriate. However if
+the program is some type of editor running on a desktop, you may want to give
+the operator the option of saving their tediously entered information instead of
+just exiting the program. A memory allocation failure in an embedded processor,
+such as might be in a washing machine, could cause an automatic reset of the
+machine. For this reason, many embedded systems designers avoid dynamic memory
+allocation altogether.
+
+
+## The `calloc` function
+
+The calloc function allocates space for an array of items and initializes the
+memory to zeros. The call `mArray = calloc( count, sizeof(struct V))` allocates
+count objects, each of whose size is sufficient to contain an instance of the
+structure `struct V`. The space is initialized to all bits zero. The function
+returns either a pointer to the allocated memory or, if the allocation fails,
+`NULL`.
+
+
+## The `realloc` function
+
+``` c
+void * realloc ( void * ptr, size_t size );
+```
+
+The `realloc` function changes the size of the object pointed to by `ptr` to the
+size specified by size. The contents of the object shall be unchanged up to the
+lesser of the new and old sizes. If the new size is larger, the value of the
+newly allocated portion of the object is indeterminate. If `ptr` is a null
+pointer, the `realloc` function behaves like the `malloc` function for the
+specified size. Otherwise, if `ptr` does not match a pointer earlier returned by
+the `calloc`, `malloc`, or `realloc` function, or if the space has been
+deallocated by a call to the `free` or `realloc` function, the behavior is
+undefined. If the space cannot be allocated, the object pointed to by `ptr` is
+unchanged. If size is zero and `ptr` is not a null pointer, the object pointed
+to is freed. The `realloc` function returns either a null pointer or a pointer
+to the possibly moved allocated object.
+
+
+## The `free` function
+
+Memory that has been allocated using malloc, realloc, or calloc must be released
+back to the system memory pool once it is no longer needed. This is done to
+avoid perpetually allocating more and more memory, which could result in an
+eventual memory allocation failure. Memory that is not released with free is
+however released when the current program terminates on most operating systems.
+Calls to free are as in the following example.
+
+```c
+int *myStuff = malloc( 20 * sizeof(int));
+if (myStuff != NULL)
+{
+  // more statements here
+  // time to release myStuff
+  free( myStuff );
+}
+```
+
+
+### free with recursive data structures
+
+It should be noted that `free` is neither intelligent nor recursive. The
+following code that depends on the recursive application of `free` to the
+internal variables of a `struct` does not work.
+
+```c
+typedef struct BSTNode
+{
+  int value;
+  struct BSTNode* left;
+  struct BSTNode* right;
+} BSTNode;
+
+// Later: ...
+
+BSTNode* temp = (BSTNode*) calloc(1, sizeof(BSTNode));
+temp->left = (BSTNode*) calloc(1, sizeof(BSTNode));
+
+// Later: ...
+
+free(temp); // WRONG! don't do this!
+```
+
+The statement `free(temp);` will not free `temp->left`, causing a memory leak.
+The correct way is to define a function that frees every node in the data
+structure:
+
+```c
+void BSTFree(BSTNode* node){
+  if (node != NULL) {
+    BSTFree(node->left);
+    BSTFree(node->right);
+    free(node);
+  }
+}
+```
+
+Because C does not have a garbage collector, C programmers are responsible for
+making sure there is a `free()` exactly once for each time there is a
+`malloc()`. If a tree has been allocated one node at a time, then it needs to be
+freed one node at a time.
+
+
+### Don't free undefined pointers
+
+Furthermore, using `free` when the pointer in question was never allocated in
+the first place often crashes or leads to mysterious bugs further along.
+
+To avoid this problem, always initialize pointers when they are declared. Either
+use `malloc` at the point they are declared (as in most examples in this
+chapter), or set them to `NULL` when they are declared (as in the "delayed
+allocation" example in this chapter).[^1]
+
+[^1]:  ["Bug 478901 ... libpng-1.2.34 and earlier might free undefined pointers"](https://bugzilla.mozilla.org/show_bug.cgi?id=478901)
+
+
+### Write constructor/destructor functions
+
+One way to get memory initialization and destruction right is to imitate
+object-oriented programming. In this paradigm, objects are constructed after raw
+memory is allocated for them, live their lives, and when it is time for them to
+be destructed, a special function called a destructor destroys the object's
+innards before the object itself is destroyed.
+
+For example:
+
+```c
+#include <stdlib.h> /* need malloc and friends */
+
+/* this is the type of object we have, with a single int member */
+typedef struct WIDGET_T {
+  int member;
+} WIDGET_T;
+
+/* functions that deal with WIDGET_T */
+
+/* constructor function */
+void
+WIDGETctor (WIDGET_T *this, int x)
+{
+  this->member = x;
+}
+
+/* destructor function */
+void
+WIDGETdtor (WIDGET_T *this)
+{
+  /* In this case, I really don't have to do anything, but
+     if WIDGET_T had internal pointers, the objects they point to
+     would be destroyed here.  */
+  this->member = 0;
+}
+
+/* create function - this function returns a new WIDGET_T */
+WIDGET_T *
+WIDGETcreate (int m)
+{
+  WIDGET_T *x = 0;
+
+  x = malloc (sizeof (WIDGET_T));
+  if (x == 0)
+    abort (); /* no memory */
+  WIDGETctor (x, m);
+
+
+ return x;
+}
+
+/* destroy function - calls the destructor, then frees the object */
+void
+WIDGETdestroy (WIDGET_T *this)
+{
+  WIDGETdtor (this);
+  free (this);
+}
+
+/* END OF CODE */
+```
+
+
+# Error handling
+
+C does not provide direct support for error handling (also known as exception
+handling). By convention, the programmer is expected to prevent errors from
+occurring in the first place, and test return values from functions. For
+example, `-1` and `NULL` are used in several functions such as `socket()` (Unix
+socket programming) or `malloc()` respectively to indicate problems that the
+programmer should be aware about. In a worst case scenario where there is an
+unavoidable error and no way to recover from it, a C programmer usually tries to
+log the error and "gracefully" terminate the program.
+
+There is an external variable called "errno", accessible by the programs after
+including `<errno.h>` - that file comes from the definition of the possible
+errors that can occur in some Operating Systems (e.g. Linux - in this case, the
+definition is in `include/asm-generic/errno.h`) when programs ask for resources.
+Such variable indexes error descriptions accessible by the function
+`strerror(errno)`.
+
+The following code tests the return value from the library function `malloc` to
+see if dynamic memory allocation completed properly:
+
+```c
+#include <stdio.h>        /* perror */
+#include <errno.h>        /* errno */
+#include <stdlib.h>       /* malloc, free, exit */
+
+int main(void)
+{
+
+    /* Pointer to char, requesting dynamic allocation of 2,000,000,000
+     * storage elements (declared as an integer constant of type
+     * unsigned long int). (If your system has less than 2 GB of memory
+     * available, then this call to malloc will fail.)
+     */
+    char *ptr = malloc(2000000000UL);
+
+    if (ptr == NULL) {
+        perror("malloc failed");
+        /* here you might want to exit the program or compensate
+           for that you don't have 2GB available
+         */
+    } else {
+        /* The rest of the code hereafter can assume that 2,000,000,000
+         * chars were successfully allocated...
+         */
+        free(ptr);
+    }
+
+    exit(EXIT_SUCCESS); /* exiting program */
+}
+```
+
+The code snippet above shows the use of the return value of the library function
+`malloc` to check for errors. Many library functions have return values that
+flag errors, and thus should be checked by the astute programmer. In the snippet
+above, a `NULL` pointer returned from `malloc` signals an error in allocation,
+so the program exits. In more complicated implementations, the program might try
+to handle the error and try to recover from the failed memory allocation.
+
+
+## Preventing divide by zero errors
+
+A common pitfall made by C programmers is not checking if a divisor is zero
+before a division command. The following code will produce a runtime error and
+in most cases, exit.
+
+```c
+int dividend = 50;
+int divisor = 0;
+int quotient;
+
+quotient = (dividend/divisor); /* This will produce a runtime error! */
+```
+
+For reasons beyond the scope of this document, you must check or make sure that
+a divisor is never zero. Alternatively, for *nix processes, you can stop the OS
+from terminating your process by blocking the SIGFPE signal.
+
+The code below fixes this by checking if the divisor is zero before dividing.
+
+```c
+#include <stdio.h> /* for fprintf and stderr */
+#include <stdlib.h> /* for exit */
+int main( void )
+{
+    int dividend = 50;
+    int divisor = 0;
+    int quotient;
+
+    if (divisor == 0) {
+        /* Example handling of this error. Writing a message to stderr, and
+         * exiting with failure.
+         */
+        fprintf(stderr, "Division by zero! Aborting...\n");
+        exit(EXIT_FAILURE); /* indicate failure.*/
+    }
+
+
+
+  quotient = dividend / divisor;
+    exit(EXIT_SUCCESS); /* indicate success.*/
+}
+```
+@run
+
+
+## Signals
+
+In some cases, the environment may respond to a programming error in C by
+raising a signal. Signals are events raised by the host environment or operating
+system to indicate that a specific error or critical event has occurred (e.g. a
+division by zero, interrupt, and so on.) However, these signals are not meant to
+be used as a means of error catching; they usually indicate a critical event
+that will interfere with normal program flow.
+
+To handle signals, a program needs to use the `signal.h` header file. A signal
+handler will need to be defined, and the `signal()` function is then called to
+allow the given signal to be handled. Some signals that are raised to an
+exception within your code (e.g. a division by zero) are unlikely to allow your
+program to recover. These signal handlers will be required to instead ensure
+that some resources are properly cleaned up before the program terminates.
+
+This example creates a signal handler and raises the signal:
+
+```c
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+static void catch_function(int signal) {
+    puts("Interactive attention signal caught.");
+}
+
+int main(void) {
+    if (signal(SIGINT, catch_function) == SIG_ERR) {
+        fputs("An error occurred while setting a signal handler.\n", stderr);
+        return EXIT_FAILURE;
+    }
+    puts("Raising the interactive attention signal.");
+    if (raise(SIGINT) != 0) {
+        fputs("Error raising the signal.\n", stderr);
+        return EXIT_FAILURE;
+    }
+    puts("Exiting.");
+    return 0;
+}
+```
+
+
+## `setjmp`
+
+The `setjmp` function can be used to emulate the exception handling feature of
+other programming languages. The first call to `setjmp` provides a reference
+point to returning to a given function, and is valid as long as the function
+containing `setjmp()` doesn't return or exit. A call to `longjmp` causes the
+execution to return to the point of the associated `setjmp` call.
+
+```c
+#include <stdio.h>
+#include <setjmp.h>
+
+jmp_buf test1;
+
+void tryjump()
+{
+  longjmp(test1, 3);
+}
+
+int main (void)
+{
+  if (setjmp(test1)==0) {
+    printf ("setjmp() returned 0.");
+    tryjump();
+  } else {
+    printf ("setjmp returned from a longjmp function call.");
+  }
+}
+```
+@run
+
+The values of non-volatile variables may be corrupted when `setjmp` returns from
+a `longjmp` call.
+
+While `setjmp()` and `longjmp()` may be used for error handling, it is generally
+preferred to use the return value of a function to indicate an error, if
+possible.
+
+
+# Stream IO
+
+## Introduction
+
+The `stdio.h` header declares a broad assortment of functions that perform input
+and output to files and devices such as the console. It was one of the earliest
+headers to appear in the C library. It declares more functions than any other
+standard header and also requires more explanation because of the complex
+machinery that underlies the functions.
+
+The device-independent model of input and output has seen dramatic improvement
+over the years and has received little recognition for its success. FORTRAN II
+was touted as a machine-independent language in the 1960s, yet it was
+essentially impossible to move a FORTRAN program between architectures without
+some change. In FORTRAN II, you named the device you were talking to right in
+the FORTRAN statement in the middle of your FORTRAN code. So, you said
+`READ INPUT TAPE 5` on a tape-oriented IBM 7090 but `READ CARD` to read a card
+image on other machines. FORTRAN IV had more generic `READ` and `WRITE`
+statements, specifying a logical unit number (LUN) instead of the device name.
+The era of device-independent I/O had dawned.
+
+Peripheral devices such as printers still had fairly strong notions about what
+they were asked to do. And then, peripheral interchange utilities were invented
+to handle bizarre devices. When cathode-ray tubes came onto the scene, each
+manufacturer of consoles solved problems such as console cursor movement in an
+independent manner, causing further headaches.
+
+It was into this atmosphere that Unix was born. Ken Thompson and Dennis Ritchie,
+the developers of Unix, deserve credit for packing any number of bright ideas
+into the operating system. Their approach to device independence was one of the
+brightest.
+
+The ANSI C `<stdio.h>` library is based on the original Unix file I/O primitives
+but casts a wider net to accommodate the least-common denominator across varied
+systems.
+
+
+## Streams
+
+Input and output, whether to or from physical devices such as terminals and tape
+drives, or whether to or from files supported on structured storage devices, are
+mapped into logical data streams, whose properties are more uniform than their
+various inputs and outputs. Two forms of mapping are supported: text streams and
+binary streams.
+
+A text stream consists of one or more lines. A line in a text stream consists of
+zero or more characters plus a terminating new-line character. (The only
+exception is that in some implementations the last line of a file does not
+require a terminating new-line character.) Unix adopted a standard internal
+format for all text streams. Each line of text is terminated by a new-line
+character. That's what any program expects when it reads text, and that's what
+any program produces when it writes text. (This is the most basic convention,
+and if it doesn't meet the needs of a text-oriented peripheral attached to a
+Unix machine, then the fix-up occurs out at the edges of the system. Nothing in
+between needs to change.) The string of characters that go into, or come out of
+a text stream may have to be modified to conform to specific conventions. This
+results in a possible difference between the data that go into a text stream and
+the data that come out. For instance, in some implementations when a
+space-character precedes a new-line character in the input, the space character
+gets removed out of the output. In general, when the data only consists of
+printable characters and control characters like horizontal tab and new-line,
+the input and output of a text stream are equal.
+
+Compared to a text stream, a binary stream is pretty straight forward. A binary
+stream is an ordered sequence of characters that can transparently record
+internal data. Data written to a binary stream shall always equal the data that
+gets read out under the same implementation. Binary streams, however, may have
+an implementation-defined number of null characters appended to the end of the
+stream. There are no further conventions which need to be considered.
+
+Nothing in Unix prevents the program from writing arbitrary 8-bit binary codes
+to any open file, or reading them back unchanged from an adequate repository.
+Thus, Unix obliterated the long-standing distinction between text streams and
+binary streams.
