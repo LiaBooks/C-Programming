@@ -3,7 +3,7 @@ author:   André Dietrich
 
 email:    andre.dietrich@ovgu.de
 
-version:  0.0.2
+version:  0.0.3
 
 language: en
 
@@ -11,6 +11,8 @@ narrator: US English Female
 
 comment:  Try to write a short comment about
           your course, multiline is also okay.
+
+mode:     Textbook
 
 import:   https://raw.githubusercontent.com/liaTemplates/rextester/master/README.md
 
