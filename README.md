@@ -3,14 +3,22 @@ author:   André Dietrich
 
 email:    andre.dietrich@ovgu.de
 
-version:  0.0.3
+version:  1.0.0
+
+logo:     https://upload.wikimedia.org/wikipedia/commons/1/1b/Ken_Thompson_and_Dennis_Ritchie--1973.jpg
 
 language: en
 
 narrator: US English Female
 
-comment:  Try to write a short comment about
-          your course, multiline is also okay.
+comment:  This LiaScript book is based on the free
+          [Wikibook on C-Programming](https://en.wikibooks.org/wiki/C_Programming).
+          It provides a comprehensive look at the C programming language and its
+          features. Examples are made interactive by using the
+          [Rextester - API](https://rextester.com).
+
+
+
 
 mode:     Textbook
 
