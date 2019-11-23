@@ -3,7 +3,7 @@ author:   André Dietrich
 
 email:    andre.dietrich@ovgu.de
 
-version:  1.0.0
+version:  1.0.1
 
 logo:     https://upload.wikimedia.org/wikipedia/commons/1/1b/Ken_Thompson_and_Dennis_Ritchie--1973.jpg
 
