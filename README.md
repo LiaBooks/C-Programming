@@ -3,7 +3,7 @@ author:   André Dietrich
 
 email:    LiaScript@web.de
 
-version:  1.0.2
+version:  1.0.3
 
 logo:     https://upload.wikimedia.org/wikipedia/commons/1/1b/Ken_Thompson_and_Dennis_Ritchie--1973.jpg
 
@@ -24,7 +24,7 @@ mode:     Textbook
 
 import:   https://raw.githubusercontent.com/liaTemplates/rextester/master/README.md
 
-@run:     @Rextester.C
+@run:     @Rextester.C_clang
 
 -->
 
