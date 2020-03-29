@@ -1,9 +1,9 @@
 <!--
 author:   André Dietrich
 
-email:    andre.dietrich@ovgu.de
+email:    LiaScript@web.de
 
-version:  1.0.1
+version:  1.0.2
 
 logo:     https://upload.wikimedia.org/wikipedia/commons/1/1b/Ken_Thompson_and_Dennis_Ritchie--1973.jpg
 
@@ -4609,13 +4609,13 @@ The following libraries are recognized by POSIX:
   and `pthread_kill()` and `pthread_sigmask()` referenced in `<signal.h>`. An
   implementation may search this library in the absence of this option.
 
-* __m__ 	
+* __m__
 
   This option shall make available all interfaces referenced in `<math.h>`,
   `<complex.h>`, and `<fenv.h>`. An implementation may search this library in
   the absence of this option.
 
-* __rt__ 	
+* __rt__
 
   This option shall make available all interfaces referenced in `<aio.h>`,
   `<mqueue.h>`, `<sched.h>`, `<semaphore.h>`, and `<spawn.h>`, interfaces marked
@@ -4624,18 +4624,18 @@ The following libraries are recognized by POSIX:
   in `<time.h>`. An implementation may search this library in the absence of
   this option.
 
-* __trace__ 	
+* __trace__
 
   This option shall make available all interfaces referenced in `<trace.h>`. An
   implementation may search this library in the absence of this option.
 
-* __xnet__ 	
+* __xnet__
 
   This option shall make available all interfaces referenced in `<arpa/inet.h>`,
   `<netdb.h>`, `<net/if.h>`, `<netinet/in.h>`, and `<sys/socket.h>`. An
   implementation may search this library in the absence of this option.
 
-* __y__ 	
+* __y__
 
   This option shall make available all interfaces required by the C-language
   output of yacc that are not made available through the -l c option. (Some
@@ -5479,7 +5479,7 @@ A[4] = linearA + 21;         /* 25 - 21 = 4 elements        */
 A[5] = linearA + 25;         /* 30 - 25 = 5 elements        */
 
 *A[3][2] = 3.66;          /* assigns 3.66 to linearA[17];     */
-*A[3][-3] = 1.44;         /* refers to linearA[12];           
+*A[3][-3] = 1.44;         /* refers to linearA[12];
                              negative indices are sometimes useful. But avoid using them as much as possible. */
 ```
 
