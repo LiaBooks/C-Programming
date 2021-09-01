@@ -3,7 +3,7 @@ author:   André Dietrich
 
 email:    LiaScript@web.de
 
-version:  1.0.3
+version:  2.0.0
 
 logo:     https://upload.wikimedia.org/wikipedia/commons/1/1b/Ken_Thompson_and_Dennis_Ritchie--1973.jpg
 
@@ -15,16 +15,16 @@ comment:  This LiaScript book is based on the free
           [Wikibook on C-Programming](https://en.wikibooks.org/wiki/C_Programming).
           It provides a comprehensive look at the C programming language and its
           features. Examples are made interactive by using the
-          [Rextester - API](https://rextester.com).
+          [CodeRunner](https://github.com/liascript/coderunner).
 
 
 
 
 mode:     Textbook
 
-import:   https://raw.githubusercontent.com/liaTemplates/rextester/master/README.md
+import: https://raw.githubusercontent.com/liascript/CodeRunner/master/README.md
 
-@run:     @Rextester.C_clang
+@run: @LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 -->
 
@@ -751,6 +751,11 @@ printf (
 
 return 0;
 ```
+
+[[ ]] Add as many elements as you want?
+[[X]] The X marks the correct answer!
+[[ ]] ... this is wrong ...
+[[X]] ... this has to be selected too ...
 
 The compiler simply ignores most whitespace (except, for example, when it
 separates `return` from `0`). However, it is common practice to use spaces (or
